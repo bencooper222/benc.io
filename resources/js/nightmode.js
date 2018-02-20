@@ -9,7 +9,7 @@ import moment from 'moment-timezone';
 const changeBackground = document.getElementsByTagName("body");
 const changeColor = colorToChangeElements();
 
-function colorToChangeElements() {
+const colorToChangeElements = () => {
   let icons = document.getElementsByTagName("i");
   let svgs = document.getElementsByClassName("not-fa");
 
@@ -19,7 +19,7 @@ function colorToChangeElements() {
   return addArrays([icons, h2, h3, svgs]);
 }
 
-function addArrays(arrays) {
+const addArrays = (arrays) => {
   // arrays is an array of arrays
   let rtn = [];
 
@@ -30,7 +30,7 @@ function addArrays(arrays) {
   return rtn;
 }
 
-function makeDay() {
+const makeDay = () => {
   for (let i = 0; i < changeBackground.length; i++) {
     console.log();
     changeBackground[i].style.backgroundColor = "white";
@@ -41,7 +41,7 @@ function makeDay() {
   }
 }
 
-function makeNight() {
+const makeNight = () => {
   for (let i = 0; i < changeBackground.length; i++) {
     console.log();
     changeBackground[i].style.backgroundColor = "black";
@@ -52,7 +52,7 @@ function makeNight() {
   }
 }
 
-function getSunriseSunsetTimes() {
+const getSunriseSunsetTimes = () => {
   return fetch("https://freegeoip.net/json/")
     .then(location => {
       return location.json();
@@ -78,24 +78,24 @@ function getSunriseSunsetTimes() {
     });
 }
 
-function calculateCorrectState() {
-  getSunriseSunsetTimes().then(function(data) {
+const calculateCorrectState = () => {
+  getSunriseSunsetTimes().then(function (data) {
     let now = moment();
     if (now.isAfter(data.begin) && now.isBefore(data.end)) {
       console.log(
         "It is between: " +
-          data.begin.format("MMMM Do YYYY, h:mm:ss a") +
-          " and " +
-          data.end.format("MMMM Do YYYY, h:mm:ss a")
+        data.begin.format("MMMM Do YYYY, h:mm:ss a") +
+        " and " +
+        data.end.format("MMMM Do YYYY, h:mm:ss a")
       );
       stateSwicher("day");
       setLocalStorage("day", data.begin, data.end);
     } else {
       console.log(
         "It is either before " +
-          data.begin.format("MMMM Do YYYY, h:mm:ss a") +
-          " or after " +
-          data.end.format("MMMM Do YYYY, h:mm:ss a")
+        data.begin.format("MMMM Do YYYY, h:mm:ss a") +
+        " or after " +
+        data.end.format("MMMM Do YYYY, h:mm:ss a")
       );
 
       stateSwicher("night");
@@ -104,7 +104,7 @@ function calculateCorrectState() {
   });
 }
 
-function setState() {
+const setState = () => {
   let cache;
 
   cache = JSON.parse(localStorage.getItem("state"));
@@ -113,7 +113,7 @@ function setState() {
     calculateCorrectState();
     return;
   }
- 
+
   if (moment.tz.guess() !== cache.tz) {
     console.log("Cache indicated changed timezone.");
     calculateCorrectState();
@@ -132,7 +132,7 @@ function setState() {
   }
 }
 
-function stateSwicher(state) {
+const stateSwicher = (state) => {
   switch (state) {
     case "day":
       makeDay();
@@ -146,7 +146,7 @@ function stateSwicher(state) {
   }
 }
 
-function setLocalStorage(state, startDayTime, endDayTime) {
+const setLocalStorage = (state, startDayTime, endDayTime) => {
   let toStore = {};
   toStore.tz = startDayTime.tz();
   if (state === "day") {
@@ -164,7 +164,7 @@ function setLocalStorage(state, startDayTime, endDayTime) {
       toStore.then = "recalculate";
     }
   }
-  
+
   localStorage.setItem("state", JSON.stringify(toStore));
 }
 
