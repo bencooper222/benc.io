@@ -1,5 +1,9 @@
 // adjust day night thing
 
+const SunCalc = require('suncalc');
+
+
+
 const changeBackground = document.getElementsByTagName("body");
 const changeColor = colorToChangeElements();
 
