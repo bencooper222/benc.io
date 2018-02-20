@@ -1,6 +1,8 @@
 // adjust day night thing
 
-const SunCalc = require('suncalc');
+import SunCalc from 'suncalc';
+//import moment from 'moment-timezone';
+import moment from 'moment-timezone';
 
 
 

