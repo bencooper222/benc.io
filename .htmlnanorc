@@ -1,0 +1,5 @@
+{
+ collapseWhitespace:true,
+  minifySvg: false,
+  minifyJson: true
+}
