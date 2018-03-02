@@ -1,3 +1,26 @@
 [build]
   publish = "build/"
   command = "yarn prod"
+  functions = "lambda-build/"
+
+
+[context.production]
+[[redirects]]
+  from ="/location/*"
+  to = "https://freegeoip.net/json/"
+  status = 200
+
+
+
+[context.deploy-preview]
+[[redirects]]
+  from ="/location/*"
+  to = "https://freegeoip.net/json/"
+  status = 200
+
+
+[context.branch-deploy]
+[[redirects]]
+  from ="/location/*"
+  to = "https://freegeoip.net/json/"
+  status = 200
