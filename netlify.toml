@@ -7,7 +7,7 @@
 [context.production]
 [[redirects]]
   from ="/location/*"
-  to = "https://freegeoip.net/json/"
+  to = "https://extreme-ip-lookup.com/json/"
   status = 200
 
 
@@ -15,12 +15,12 @@
 [context.deploy-preview]
 [[redirects]]
   from ="/location/*"
-  to = "https://freegeoip.net/json/"
+  to = "https://extreme-ip-lookup.com/json/"
   status = 200
 
 
 [context.branch-deploy]
 [[redirects]]
   from ="/location/*"
-  to = "https://freegeoip.net/json/"
+  to = "https://extreme-ip-lookup.com/json/"
   status = 200
