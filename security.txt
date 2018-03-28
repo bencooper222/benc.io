@@ -1,2 +1,3 @@
 Contact: bencooper222@gmail.com
 Encryption: https://keybase.io/benc222
+Acknowledgements: https://www.troyhunt.com/fixing-data-breaches-part-3-the-ease-of-disclosure/
