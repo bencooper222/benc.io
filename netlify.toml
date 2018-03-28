@@ -5,22 +5,30 @@
 
 
 [context.production]
-[[redirects]]
-  from ="/location/*"
-  to = "https://extreme-ip-lookup.com/json/"
-  status = 200
-
+redirects = [
+  {from="/netlify-location/*", to="https://extreme-ip-lookup.com/json/", status=200},
+  {from ="/pub/*", to="https://pub.benc.io", status=301},
+  {from ="/geocoder/*", to="https://geocode.benc.io", status=301},
+  {from ="/geocode/*", to="https://geocode.benc.io", status=301},
+  {from ="/.well-known/security.txt", to="https://benc.io/security.txt", status=301}
+]  
 
 
 [context.deploy-preview]
-[[redirects]]
-  from ="/location/*"
-  to = "https://extreme-ip-lookup.com/json/"
-  status = 200
+redirects = [
+  {from="/netlify-location/*", to="https://extreme-ip-lookup.com/json/", status=200},
+  {from ="/pub/*", to="https://pub.benc.io", status=301},
+  {from ="/geocoder/*", to="https://geocode.benc.io", status=301},
+  {from ="/geocode/*", to="https://geocode.benc.io", status=301},
+  {from ="/.well-known/security.txt", to="https://benc.io/security.txt", status=301}
+]  
 
 
 [context.branch-deploy]
-[[redirects]]
-  from ="/location/*"
-  to = "https://extreme-ip-lookup.com/json/"
-  status = 200
+redirects = [
+  {from="/netlify-location/*", to="https://extreme-ip-lookup.com/json/", status=200},
+  {from ="/pub/*", to="https://pub.benc.io", status=301},
+  {from ="/geocoder/*", to="https://geocode.benc.io", status=301},
+  {from ="/geocode/*", to="https://geocode.benc.io", status=301},
+  {from ="/.well-known/security.txt", to="https://benc.io/security.txt", status=301}
+]  
