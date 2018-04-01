@@ -1,14 +1,14 @@
 // adjust day night thing
 
-const changeBackground = document.getElementsByTagName("body");
+const changeBackground = document.getElementsByTagName('body');
 const changeColor = colorToChangeElements();
 
 function colorToChangeElements() {
-  let icons = document.getElementsByTagName("i");
-  let svgs = document.getElementsByClassName("not-fa");
+  let icons = document.getElementsByTagName('i');
+  let svgs = document.getElementsByClassName('not-fa');
 
-  let h2 = document.getElementsByTagName("h2");
-  let h3 = document.getElementsByTagName("h3");
+  let h2 = document.getElementsByTagName('h2');
+  let h3 = document.getElementsByTagName('h3');
 
   return addArrays([icons, h2, h3, svgs]);
 }
@@ -27,27 +27,27 @@ function addArrays(arrays) {
 function makeDay() {
   for (let i = 0; i < changeBackground.length; i++) {
     console.log();
-    changeBackground[i].style.backgroundColor = "white";
+    changeBackground[i].style.backgroundColor = 'white';
   }
 
   for (let i = 0; i < changeColor.length; i++) {
-    changeColor[i].style.color = "black";
+    changeColor[i].style.color = 'black';
   }
 }
 
 function makeNight() {
   for (let i = 0; i < changeBackground.length; i++) {
     console.log();
-    changeBackground[i].style.backgroundColor = "black";
+    changeBackground[i].style.backgroundColor = 'black';
   }
 
   for (let i = 0; i < changeColor.length; i++) {
-    changeColor[i].style.color = "white";
+    changeColor[i].style.color = 'white';
   }
 }
 
 function getSunriseSunsetTimes() {
-  return fetch("https://freegeoip.net/json/")
+  return fetch('https://freegeoip.net/json/')
     .then(location => {
       return location.json();
     })
@@ -55,7 +55,7 @@ function getSunriseSunsetTimes() {
       let sunTimes = SunCalc.getTimes(
         new Date(),
         coords.latitude,
-        coords.longitude
+        coords.longitude,
       );
       return { start: sunTimes.dawn, stop: sunTimes.sunset };
     })
@@ -65,7 +65,7 @@ function getSunriseSunsetTimes() {
 
       let civilTimes = {
         begin: civilBegin,
-        end: civilEnd
+        end: civilEnd,
       };
 
       return civilTimes;
@@ -77,23 +77,23 @@ function calculateCorrectState() {
     let now = moment();
     if (now.isAfter(data.begin) && now.isBefore(data.end)) {
       console.log(
-        "It is between: " +
-          data.begin.format("MMMM Do YYYY, h:mm:ss a") +
-          " and " +
-          data.end.format("MMMM Do YYYY, h:mm:ss a")
+        'It is between: ' +
+          data.begin.format('MMMM Do YYYY, h:mm:ss a') +
+          ' and ' +
+          data.end.format('MMMM Do YYYY, h:mm:ss a'),
       );
-      stateSwicher("day");
-      setLocalStorage("day", data.begin, data.end);
+      stateSwicher('day');
+      setLocalStorage('day', data.begin, data.end);
     } else {
       console.log(
-        "It is either before " +
-          data.begin.format("MMMM Do YYYY, h:mm:ss a") +
-          " or after " +
-          data.end.format("MMMM Do YYYY, h:mm:ss a")
+        'It is either before ' +
+          data.begin.format('MMMM Do YYYY, h:mm:ss a') +
+          ' or after ' +
+          data.end.format('MMMM Do YYYY, h:mm:ss a'),
       );
 
-      stateSwicher("night");
-      setLocalStorage("night", data.begin, data.end);
+      stateSwicher('night');
+      setLocalStorage('night', data.begin, data.end);
     }
   });
 }
@@ -101,25 +101,25 @@ function calculateCorrectState() {
 function setState() {
   let cache;
 
-  cache = JSON.parse(localStorage.getItem("state"));
+  cache = JSON.parse(localStorage.getItem('state'));
   if (cache === null) {
-    console.log("No cache, manual calculations");
+    console.log('No cache, manual calculations');
     calculateCorrectState();
     return;
   }
- 
+
   if (moment.tz.guess() !== cache.tz) {
-    console.log("Cache indicated changed timezone.");
+    console.log('Cache indicated changed timezone.');
     calculateCorrectState();
     return;
   }
 
   if (moment().isBefore(cache.until)) {
-    console.log("Cache indicated state should not change.");
+    console.log('Cache indicated state should not change.');
     stateSwicher(cache.state);
   } else {
     console.log(
-      "Cache indicated state should change. Using designated new state and recalculating cache"
+      'Cache indicated state should change. Using designated new state and recalculating cache',
     );
     stateSwicher(cache.then);
     calculateCorrectState();
@@ -128,13 +128,14 @@ function setState() {
 
 function stateSwicher(state) {
   switch (state) {
-    case "day":
+    case 'day':
       makeDay();
       break;
-    case "night":
+    case 'night':
       makeNight();
       break;
-    default: //recalculate included
+    default:
+      //recalculate included
       calculateCorrectState();
       break;
   }
@@ -143,23 +144,23 @@ function stateSwicher(state) {
 function setLocalStorage(state, startDayTime, endDayTime) {
   let toStore = {};
   toStore.tz = startDayTime.tz();
-  if (state === "day") {
-    toStore.state = "day";
+  if (state === 'day') {
+    toStore.state = 'day';
     toStore.until = endDayTime.format();
-    toStore.then = "night";
-  } else if (state === "night") {
+    toStore.then = 'night';
+  } else if (state === 'night') {
     if (moment().isBefore(endDayTime)) {
-      toStore.state = "night";
+      toStore.state = 'night';
       toStore.until = startDayTime.format();
-      toStore.then = "day";
+      toStore.then = 'day';
     } else {
-      toStore.state = "night";
+      toStore.state = 'night';
       toStore.until = moment().endOf('day');
-      toStore.then = "recalculate";
+      toStore.then = 'recalculate';
     }
   }
-  
-  localStorage.setItem("state", JSON.stringify(toStore));
+
+  localStorage.setItem('state', JSON.stringify(toStore));
 }
 
 setState();
