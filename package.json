@@ -24,5 +24,4 @@
     "prettier": "^1.11.1"
   },
   "postinstall": "npm rebuild node-sass"
-
 }
