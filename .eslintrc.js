@@ -3,7 +3,6 @@ module.exports = {
         "eslint:recommended",
         "prettier"
     ],
-    files: ["*.js","*.html"],
     "plugins": [
         "prettier",
         "html"
