@@ -22,5 +22,7 @@
     "eslint-plugin-html": "^4.0.2",
     "eslint-plugin-prettier": "^2.6.0",
     "prettier": "^1.11.1"
-  }
+  },
+  "postinstall": "npm rebuild node-sass"
+
 }
