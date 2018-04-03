@@ -1,4 +1,6 @@
 // adjust day night thing
+import SunCalc from 'suncalc';
+import moment from 'moment-timezone';
 
 const changeBackground = document.getElementsByTagName('body');
 const changeColor = colorToChangeElements();
@@ -100,9 +102,15 @@ function calculateCorrectState() {
 
 function setState() {
   let cache;
+  try {
+    cache = JSON.parse(localStorage.getItem('state'));
+  } catch (err) {
+    console.log('Cache parsing failed, manual calculations');
+    calculateCorrectState();
+    return;
+  }
 
-  cache = JSON.parse(localStorage.getItem('state'));
-  if (cache === null) {
+  if (cache == null) {
     console.log('No cache, manual calculations');
     calculateCorrectState();
     return;
