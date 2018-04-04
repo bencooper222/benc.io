@@ -2,10 +2,7 @@
 import SunCalc from 'suncalc';
 //import moment from 'moment-timezone';
 
-const changeBackground = document.getElementsByTagName('body');
-const changeColor = colorToChangeElements();
-
-function colorToChangeElements() {
+const colorToChangeElements = () => {
   let icons = document.getElementsByTagName('i');
   let svgs = document.getElementsByClassName('not-fa');
 
@@ -13,9 +10,9 @@ function colorToChangeElements() {
   let h3 = document.getElementsByTagName('h3');
 
   return addArrays([icons, h2, h3, svgs]);
-}
+};
 
-function addArrays(arrays) {
+const addArrays = arrays => {
   // arrays is an array of arrays
   let rtn = [];
 
@@ -24,9 +21,9 @@ function addArrays(arrays) {
   }
 
   return rtn;
-}
+};
 
-function makeDay() {
+const makeDay = () => {
   for (let i = 0; i < changeBackground.length; i++) {
     console.log();
     changeBackground[i].style.backgroundColor = 'white';
@@ -35,9 +32,9 @@ function makeDay() {
   for (let i = 0; i < changeColor.length; i++) {
     changeColor[i].style.color = 'black';
   }
-}
+};
 
-function makeNight() {
+const makeNight = () => {
   for (let i = 0; i < changeBackground.length; i++) {
     console.log();
     changeBackground[i].style.backgroundColor = 'black';
@@ -46,9 +43,9 @@ function makeNight() {
   for (let i = 0; i < changeColor.length; i++) {
     changeColor[i].style.color = 'white';
   }
-}
+};
 
-function getSunriseSunsetTimes() {
+const getSunriseSunsetTimes = () => {
   return fetch('https://freegeoip.net/json/')
     .then(location => {
       return location.json();
@@ -72,9 +69,9 @@ function getSunriseSunsetTimes() {
 
       return civilTimes;
     });
-}
+};
 
-function calculateCorrectState() {
+const calculateCorrectState = () => {
   getSunriseSunsetTimes().then(function(data) {
     let now = moment();
     if (now.isAfter(data.begin) && now.isBefore(data.end)) {
@@ -98,9 +95,9 @@ function calculateCorrectState() {
       setLocalStorage('night', data.begin, data.end);
     }
   });
-}
+};
 
-function setState() {
+const setState = () => {
   let cache;
   try {
     cache = JSON.parse(localStorage.getItem('state'));
@@ -132,9 +129,9 @@ function setState() {
     stateSwicher(cache.then);
     calculateCorrectState();
   }
-}
+};
 
-function stateSwicher(state) {
+const stateSwicher = state => {
   switch (state) {
     case 'day':
       makeDay();
@@ -147,9 +144,9 @@ function stateSwicher(state) {
       calculateCorrectState();
       break;
   }
-}
+};
 
-function setLocalStorage(state, startDayTime, endDayTime) {
+const setLocalStorage = (state, startDayTime, endDayTime) => {
   let toStore = {};
   toStore.tz = startDayTime.tz();
   if (state === 'day') {
@@ -169,6 +166,8 @@ function setLocalStorage(state, startDayTime, endDayTime) {
   }
 
   localStorage.setItem('state', JSON.stringify(toStore));
-}
+};
 
+const changeBackground = document.getElementsByTagName('body');
+const changeColor = colorToChangeElements();
 setState();
