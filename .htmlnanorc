@@ -1,5 +1,5 @@
 {
-  collapseWhitespace: 'conservative',
-  minifySvg: true,
+ collapseWhitespace: 'conservative',
+  minifySvg: false,
   minifyJson: true
 }
