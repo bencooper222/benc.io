@@ -28,17 +28,28 @@ const articleLinks = [
 
 let articleLinksTemp = articleLinks;
 const link = document.getElementById('link');
+link.target = '_blank';
 
-link.addEventListener('click', function() {
+const randomPick = () => {
   if (articleLinksTemp.length === 0) {
     // if it's somehow empty, repopulate
     articleLinksTemp = articleLinks;
   }
 
+  // process to randomly select article
   let rand = Math.floor(Math.random() * articleLinks.length);
-  let article = articleLinksTemp[rand]; // select article
+  let article = articleLinksTemp[rand];
+  link.href = article;
 
-  window.open(article, '_blank');
-  articleLinksTemp.splice(rand, 1); //remove from selection
-  link.innerHTML = 'another reading'; // add animation in future?
-});
+  // add listener to change link onclick
+
+  link.addEventListener('click', () => {
+    setTimeout(() => {
+      articleLinksTemp.splice(rand, 1); //remove from selection
+      link.innerHTML = 'another reading'; // add animation in future?
+      randomPick();
+    }, 11);
+  });
+};
+
+randomPick();
