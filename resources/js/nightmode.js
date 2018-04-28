@@ -1,8 +1,9 @@
-// adjust day night thing
+/* global process */
 import SunCalc from 'suncalc';
 import { DateTime } from 'luxon';
 
-const ENABLE_CACHE = true;
+const ENABLE_CACHE =
+  process.env.ENABLE_CACHE == null ? true : process.env.ENABLE_CACHE == 'true';
 
 const changeBackground = document.getElementsByTagName('body');
 const changeColor = colorToChangeElements();
@@ -105,10 +106,11 @@ const calculateCorrectState = () => {
 
 const setState = () => {
   let cache;
-  const now = DateTime.local();
+  const now = DateTime.local(); // used later in code
   try {
     // checks constant to see if it should cache
     cache = ENABLE_CACHE ? JSON.parse(localStorage.getItem('state')) : null;
+    if (cache != null) cache.until = DateTime.fromISO(cache.until); // parse ISO strings
   } catch (err) {
     console.log('Cache parsing failed, manual calculations');
     calculateCorrectState();
@@ -176,7 +178,7 @@ const setLocalStorage = (state, startDayTime, endDayTime) => {
       toStore.then = 'day';
     } else {
       toStore.state = 'night';
-      toStore.until = now.endOf('day');
+      toStore.until = now.endOf('day').toISO();
       toStore.then = 'recalculate';
     }
   }
