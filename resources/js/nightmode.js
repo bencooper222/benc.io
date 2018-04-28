@@ -5,12 +5,7 @@ import { DateTime } from 'luxon';
 const ENABLE_CACHE =
   process.env.ENABLE_CACHE == null ? true : process.env.ENABLE_CACHE == 'true';
 
-const changeBackground = document.getElementsByTagName('body');
-const changeColor = colorToChangeElements();
-
 function addArrays(arrays) {
-
-const addArrays = arrays => {
   // arrays is an array of arrays
   let rtn = [];
 
@@ -19,8 +14,7 @@ const addArrays = arrays => {
   }
 
   return rtn;
-};
-
+}
 
 function colorToChangeElements() {
   let icons = document.getElementsByTagName('i');
@@ -31,7 +25,6 @@ function colorToChangeElements() {
 
   return addArrays([icons, h2, h3, svgs]);
 }
-
 
 const makeDay = () => {
   for (let i = 0; i < changeBackground.length; i++) {
@@ -191,4 +184,5 @@ const setLocalStorage = (state, startDayTime, endDayTime) => {
 
 const changeBackground = document.getElementsByTagName('body');
 const changeColor = colorToChangeElements();
+
 setState();
