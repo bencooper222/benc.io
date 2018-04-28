@@ -18,7 +18,7 @@
   "homepage": "https://benc.io",
   "main": "index.html",
   "repository": "https://github.com/bencooper222/benc.io.git",
-  "license": "none",
+  "license": "Unlicense",
   "scripts": {
     "dev": "echo 'Defaulting to cache enabled' && export ENABLE_CACHE=true && parcel index.html",
     "dev:cache": "export ENABLE_CACHE=true && parcel index.html",
