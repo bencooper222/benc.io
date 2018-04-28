@@ -26,24 +26,19 @@ function colorToChangeElements() {
   return addArrays([icons, h2, h3, svgs]);
 }
 
-const makeDay = () => {
+const makeDefinedPeriod = period => {
+  let isNight = false;
+
+  if (period === 'night') {
+    isNight = true;
+  }
+  // defaults day
   for (let i = 0; i < changeBackground.length; i++) {
-    changeBackground[i].style.backgroundColor = 'white';
+    changeBackground[i].style.backgroundColor = isNight ? 'black' : 'white';
   }
 
   for (let i = 0; i < changeColor.length; i++) {
-    changeColor[i].style.color = 'black';
-  }
-};
-
-const makeNight = () => {
-  for (let i = 0; i < changeBackground.length; i++) {
-    console.log();
-    changeBackground[i].style.backgroundColor = 'black';
-  }
-
-  for (let i = 0; i < changeColor.length; i++) {
-    changeColor[i].style.color = 'white';
+    changeColor[i].style.color = isNight ? 'white' : 'black';
   }
 };
 
@@ -146,10 +141,10 @@ const setState = () => {
 const stateSwicher = state => {
   switch (state) {
     case 'day':
-      makeDay();
+      makeDefinedPeriod('day');
       break;
     case 'night':
-      makeNight();
+      makeDefinedPeriod('night');
       break;
     default:
       //recalculate included
