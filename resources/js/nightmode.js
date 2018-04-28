@@ -1,18 +1,11 @@
-// adjust day night thing
+/* global process */
 import SunCalc from 'suncalc';
-//import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 
-const colorToChangeElements = () => {
-  let icons = document.getElementsByTagName('i');
-  let svgs = document.getElementsByClassName('not-fa');
+const ENABLE_CACHE =
+  process.env.ENABLE_CACHE == null ? true : process.env.ENABLE_CACHE == 'true';
 
-  let h2 = document.getElementsByTagName('h2');
-  let h3 = document.getElementsByTagName('h3');
-
-  return addArrays([icons, h2, h3, svgs]);
-};
-
-const addArrays = arrays => {
+function addArrays(arrays) {
   // arrays is an array of arrays
   let rtn = [];
 
@@ -21,11 +14,20 @@ const addArrays = arrays => {
   }
 
   return rtn;
-};
+}
+
+function colorToChangeElements() {
+  let icons = document.getElementsByTagName('i');
+  let svgs = document.getElementsByClassName('not-fa');
+
+  let h2 = document.getElementsByTagName('h2');
+  let h3 = document.getElementsByTagName('h3');
+
+  return addArrays([icons, h2, h3, svgs]);
+}
 
 const makeDay = () => {
   for (let i = 0; i < changeBackground.length; i++) {
-    console.log();
     changeBackground[i].style.backgroundColor = 'white';
   }
 
@@ -56,11 +58,13 @@ const getSunriseSunsetTimes = () => {
         coords.latitude,
         coords.longitude,
       );
+
       return { start: sunTimes.dawn, stop: sunTimes.sunset };
     })
     .then(data => {
-      let civilBegin = moment.tz(data.start, moment.tz.guess());
-      let civilEnd = moment.tz(data.stop, moment.tz.guess());
+      // const format = '';
+      let civilBegin = DateTime.fromISO(data.start.toISOString());
+      let civilEnd = DateTime.fromISO(data.stop.toISOString());
 
       let civilTimes = {
         begin: civilBegin,
@@ -73,22 +77,22 @@ const getSunriseSunsetTimes = () => {
 
 const calculateCorrectState = () => {
   getSunriseSunsetTimes().then(function(data) {
-    let now = moment();
-    if (now.isAfter(data.begin) && now.isBefore(data.end)) {
+    let now = DateTime.local();
+    if (now > data.begin && now < data.end) {
       console.log(
         'It is between: ' +
-          data.begin.format('MMMM Do YYYY, h:mm:ss a') +
+          data.begin.toLocaleString(DateTime.DATETIME_FULL) +
           ' and ' +
-          data.end.format('MMMM Do YYYY, h:mm:ss a'),
+          data.end.toLocaleString(DateTime.DATETIME_FULL),
       );
       stateSwicher('day');
       setLocalStorage('day', data.begin, data.end);
     } else {
       console.log(
         'It is either before ' +
-          data.begin.format('MMMM Do YYYY, h:mm:ss a') +
+          data.begin.toLocaleString(DateTime.DATETIME_FULL) +
           ' or after ' +
-          data.end.format('MMMM Do YYYY, h:mm:ss a'),
+          data.end.toLocaleString(DateTime.DATETIME_FULL),
       );
 
       stateSwicher('night');
@@ -99,8 +103,11 @@ const calculateCorrectState = () => {
 
 const setState = () => {
   let cache;
+  const now = DateTime.local(); // used later in code
   try {
-    cache = JSON.parse(localStorage.getItem('state'));
+    // checks constant to see if it should cache
+    cache = ENABLE_CACHE ? JSON.parse(localStorage.getItem('state')) : null;
+    if (cache != null) cache.until = DateTime.fromISO(cache.until); // parse ISO strings
   } catch (err) {
     console.log('Cache parsing failed, manual calculations');
     calculateCorrectState();
@@ -108,18 +115,23 @@ const setState = () => {
   }
 
   if (cache == null) {
-    console.log('No cache, manual calculations');
+    if (ENABLE_CACHE) {
+      console.log('No cache, manual calculations');
+    } else {
+      console.log('ENABLE_CACHE is set to false, manual calculations');
+    }
+
     calculateCorrectState();
     return;
   }
 
-  if (moment.tz.guess() !== cache.tz) {
+  if (now.zoneName !== cache.tz) {
     console.log('Cache indicated changed timezone.');
     calculateCorrectState();
     return;
   }
 
-  if (moment().isBefore(cache.until)) {
+  if (now < cache.until) {
     console.log('Cache indicated state should not change.');
     stateSwicher(cache.state);
   } else {
@@ -147,20 +159,22 @@ const stateSwicher = state => {
 };
 
 const setLocalStorage = (state, startDayTime, endDayTime) => {
+  if (!ENABLE_CACHE) return; // env variable
   let toStore = {};
-  toStore.tz = startDayTime.tz();
+  const now = DateTime.local();
+  toStore.tz = startDayTime.zoneName;
   if (state === 'day') {
     toStore.state = 'day';
-    toStore.until = endDayTime.format();
+    toStore.until = endDayTime.toISO();
     toStore.then = 'night';
   } else if (state === 'night') {
-    if (moment().isBefore(endDayTime)) {
+    if (now < endDayTime) {
       toStore.state = 'night';
-      toStore.until = startDayTime.format();
+      toStore.until = startDayTime.toISO();
       toStore.then = 'day';
     } else {
       toStore.state = 'night';
-      toStore.until = moment().endOf('day');
+      toStore.until = now.endOf('day').toISO();
       toStore.then = 'recalculate';
     }
   }
@@ -170,4 +184,5 @@ const setLocalStorage = (state, startDayTime, endDayTime) => {
 
 const changeBackground = document.getElementsByTagName('body');
 const changeColor = colorToChangeElements();
+
 setState();
