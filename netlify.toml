@@ -25,6 +25,10 @@
   from="/.well-known/security.txt"
   to="https://benc.io/security.txt"
   status=301
+  [[redirects]]
+  from="/index.html/*"
+  to="/"
+  status=301
   
 
 [context.deploy-preview]
@@ -47,6 +51,10 @@
   from="/.well-known/security.txt"
   to="https://benc.io/security.txt"
   status=301
+  [[redirects]]
+  from="/index.html/*"
+  to="/"
+  status=301
 
 
 [context.branch-deploy]
@@ -68,4 +76,8 @@
   [[redirects]]
   from="/.well-known/security.txt"
   to="https://benc.io/security.txt"
+  status=301
+  [[redirects]]
+  from="/index.html/*"
+  to="/"
   status=301

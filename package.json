@@ -8,14 +8,16 @@
     "dev": "echo 'Defaulting to cache enabled' && export ENABLE_CACHE=true && parcel index.html",
     "dev:cache": "export ENABLE_CACHE=true && parcel index.html",
     "dev:nocache": "export ENABLE_CACHE=false && parcel index.html",
-    "prod": "parcel build index.html -d build/ --public-url ./ && cp keybase.txt security.txt build"
+    "prod": "parcel build index.html -d build/ --public-url ./ && cp keybase.txt security.txt build",
+    "sass-lint": "sass-lint --verbose",
+    "sass-lint:fix": "sass-lint-auto-fix --verbose"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "luxon": "^1.2.0",
     "node-sass": "^4.7.2",
-    "parcel-bundler": "^1.6.1",
+    "parcel-bundler": "^1.7.0",
     "suncalc": "^1.8.0"
   },
   "devDependencies": {
@@ -23,7 +25,10 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-html": "^4.0.2",
     "eslint-plugin-prettier": "^2.6.0",
-    "prettier": "^1.11.1"
+    "prettier": "^1.11.1",
+    "sass-lint": "^1.12.1",
+    "sass-lint-auto-fix": "^0.2.6"
   },
-  "postinstall": "npm rebuild node-sass"
+  "postinstall": "npm rebuild node-sass",
+  "sasslintConfig": ".sass-lint.yml"
 }

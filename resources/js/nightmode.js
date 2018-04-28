@@ -9,6 +9,8 @@ const changeBackground = document.getElementsByTagName('body');
 const changeColor = colorToChangeElements();
 
 function addArrays(arrays) {
+
+const addArrays = arrays => {
   // arrays is an array of arrays
   let rtn = [];
 
@@ -17,7 +19,8 @@ function addArrays(arrays) {
   }
 
   return rtn;
-}
+};
+
 
 function colorToChangeElements() {
   let icons = document.getElementsByTagName('i');
@@ -28,6 +31,7 @@ function colorToChangeElements() {
 
   return addArrays([icons, h2, h3, svgs]);
 }
+
 
 const makeDay = () => {
   for (let i = 0; i < changeBackground.length; i++) {
@@ -163,7 +167,6 @@ const stateSwicher = state => {
 
 const setLocalStorage = (state, startDayTime, endDayTime) => {
   if (!ENABLE_CACHE) return; // env variable
-
   let toStore = {};
   const now = DateTime.local();
   toStore.tz = startDayTime.zoneName;
@@ -186,4 +189,6 @@ const setLocalStorage = (state, startDayTime, endDayTime) => {
   localStorage.setItem('state', JSON.stringify(toStore));
 };
 
+const changeBackground = document.getElementsByTagName('body');
+const changeColor = colorToChangeElements();
 setState();

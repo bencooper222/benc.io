@@ -1,121 +1,99 @@
-$background: 0; // 255 to default night, 0 to default day
+$background: 0;
+// 255 to default night, 0 to default day
 
 body {
-  background-color: rgb(255-$background, 255-$background, 255-$background);
-  color: rgb($background, $background, $background);
-  margin: 0;
+	background-color: rgb(255-$background, 255-$background, 255-$background);
+	color: rgb($background, $background, $background);
+	margin: 0;
 }
-
 h1 {
-  //font-family: 'Slabo 27px', serif;
-  font-family: "Roboto Slab", serif;
-  font-weight: 400;
-
-  color: rebeccapurple;
-  font-size: 4.5em;
-  margin-bottom: 0px;
-  margin-top: 0px;
-  -webkit-margin-after: 0.2em;
-  -webkit-margin-before: 0.2em;
+	//font-family: 'Slabo 27px', serif;
+	-webkit-margin-after: 0.2em;
+	-webkit-margin-before: 0.2em;
+	color: #663399;
+	font-family: "Roboto Slab", serif;
+	font-size: 4.5em;
+	font-weight: 400;
+	margin-bottom: 0px;
+	margin-top: 0px;
 }
-
-h2,
-h3 {
-  font-family: "Roboto", sans-serif;
-
-  font-weight: 400;
-  margin-top: 0px;
-  margin-bottom: 0px;
+h2, h3 {
+	font-family: "Roboto", sans-serif;
+	font-weight: 400;
+	margin-bottom: 0px;
+	margin-top: 0px;
 }
 h3 {
-  font-size: 1.2em;
+	font-size: 1.2em;
 }
-
 #headers {
-  margin-top: 15%;
+	margin-top: 15%;
 }
-
 .shift-right {
-  margin-left: 10%;
+	margin-left: 10%;
 }
-
 .icon-spacing {
-  //margin-left: 22px;
- margin-right: 22px;
+	//margin-left: 22px;
+	margin-right: 22px;
 }
-
 i {
-  margin-bottom: 10px;
-  text-decoration: none;
-  color: rgb($background, $background, $background);
-  margin-top: 15px;
+	color: rgb($background, $background, $background);
+	margin-bottom: 10px;
+	margin-top: 15px;
+	text-decoration: none;
 }
-
-a{
-  text-decoration: none;
+a {
+	text-decoration: none;
 }
-
 #icons {
-  // position: fixed;
-  //bottom: 0;
-  margin-top: 0.2%;
-  text-align: left;
-  display: inline-block;
- // width: 360px;
+	// position: fixed;
+	//bottom: 0;
+	display: inline-block;
+	margin-top: 0.2%;
+	text-align: left;
+	// width: 360px;
 }
-
 #reach {
-  margin-top: 10px;
+	margin-top: 10px;
 }
-
 #toggle {
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  margin: 0;
-  margin-left: 300px / 960px * 100%;
+	bottom: 0;
+	left: 0;
+	margin: 0;
+	margin-left: 300px / 960px * 100%;
+	position: absolute;
 }
-
 #article-prompt {
-  margin-top: 3%;
-  h3 {
-    margin-top: 0.2em;
-  }
+	margin-top: 3%;
+	h3 {
+		margin-top: 0.2em;
+	}
 }
-
 #link {
-  color: rebeccapurple;
-  font-weight: bold;
-
+	color: #663399;
+	font-weight: bold;
 }
-
 #link:hover {
-  text-decoration: underline;
-  cursor: pointer;
+	cursor: pointer;
+	text-decoration: underline;
 }
-
-#signature{
-   
-    fill: rebeccapurple;
+#signature {
+	fill: #663399;
 }
-
-svg.not-fa{
-  
-    background-color: transparent;
+svg.not-fa {
+	-webkit-font-smoothing: antialiased;
+	background-color: transparent;
+	color: rgb($background, $background, $background);
+	display: inline-block;
+	// it's technically not quite a square
     fill: currentColor;
-    width: 2em;
-    height: 2.14929577em; // it's technically not quite a square
-    color: rgb($background, $background, $background);
-    display: inline-block;
-    text-rendering:auto;
-    -webkit-font-smoothing: antialiased;
-   
+	height: 2.14929577em;
+	text-rendering: auto;
+	width: 2em;
 }
-
-svg.not-fa::before{
-  content: "\f003";
+svg.not-fa::before {
+	content: "\f003";
 }
-
-span.strike{
-  text-decoration: line-through;
+span.strike {
+	text-decoration: line-through;
 }
