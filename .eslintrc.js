@@ -28,11 +28,12 @@ module.exports = {
         "no-unused-vars": "warn",
         "constructor-super": "warn",
         "valid-typeof": "warn",
+        "quotes": ["error","single"],
         "prettier/prettier": [
             "error",
             {
                 "singleQuote": true,
-                "trailingComma": "all"
+                "trailingComma": "all",
             }
         ]
     }
