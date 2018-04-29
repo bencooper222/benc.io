@@ -1,5 +1,6 @@
 {
     "sasslint.enable": true,
     "sasslint.run": "onSave",
-    "eslint.run": "onSave"
+    "eslint.enable": true,
+    "eslint.packageManager": "yarn"
 }
