@@ -26,8 +26,8 @@ const articleLinks = [
   "https://www.vox.com/2014/9/13/6135905/open-borders-bryan-caplan-interview-gdp-double"
 ]; // who needs config variables?
 
-let articleLinksTemp = articleLinks;
-const link = <HTMLLinkElement>document.getElementById("link");
+let articleLinksTemp: string[] = articleLinks;
+const link: HTMLLinkElement = <HTMLLinkElement>document.getElementById("link");
 link.target = "_blank";
 
 const randomPick = () => {
@@ -37,8 +37,8 @@ const randomPick = () => {
   }
 
   // process to randomly select article
-  const rand = Math.floor(Math.random() * articleLinks.length);
-  const article = articleLinksTemp[rand];
+  const rand: number = Math.floor(Math.random() * articleLinks.length);
+  const article: string = articleLinksTemp[rand];
   link.href = article;
 
   // add listener to change link onclick
