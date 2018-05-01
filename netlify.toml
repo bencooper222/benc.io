@@ -1,20 +1,20 @@
 [build]
   publish = "build/"
   command = "yarn prod"
-  functions = "lambda-build/"
+  # functions = "lambda-build/"
 
 
 [context.production]
 [[redirects]]
   from="/netlify-location/*"
-  to="https://extreme-ip-lookup.com/json/" 
+  to="https://extreme-ip-lookup.com/json/"
   status=200
   [[redirects]]
   from ="/pub/*"
   to="https://pub.benc.io"
   status=301
   [[redirects]]
-  from ="/geocoder/*" 
+  from ="/geocoder/*"
   to="https://geocode.benc.io"
   status=301
   [[redirects]]
@@ -29,18 +29,18 @@
   from="/index.html/*"
   to="/"
   status=301
-  
+
 
 [context.deploy-preview]
  from="/netlify-location/*"
-  to="https://extreme-ip-lookup.com/json/" 
+  to="https://extreme-ip-lookup.com/json/"
   status=200
   [[redirects]]
   from ="/pub/*"
   to="https://pub.benc.io"
   status=301
   [[redirects]]
-  from ="/geocoder/*" 
+  from ="/geocoder/*"
   to="https://geocode.benc.io"
   status=301
   [[redirects]]
@@ -59,14 +59,14 @@
 
 [context.branch-deploy]
  from="/netlify-location/*"
-  to="https://extreme-ip-lookup.com/json/" 
+  to="https://extreme-ip-lookup.com/json/"
   status=200
   [[redirects]]
   from ="/pub/*"
   to="https://pub.benc.io"
   status=301
   [[redirects]]
-  from ="/geocoder/*" 
+  from ="/geocoder/*"
   to="https://geocode.benc.io"
   status=301
   [[redirects]]
