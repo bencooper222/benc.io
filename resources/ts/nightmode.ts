@@ -98,17 +98,17 @@ const calculateCorrectState = () => {
     const now: DateTime = DateTime.local();
     if (now > data.begin && now < data.end) {
       console.log(
-        "It is between: " +
-          data.begin.toLocaleString(DateTime.DATETIME_FULL) +
-          " and " +
-          data.end.toLocaleString(DateTime.DATETIME_FULL)
+        `It is between: ${data.begin.toLocaleString(
+          DateTime.DATETIME_FULL
+        )} and ${data.end.toLocaleString(DateTime.DATETIME_FULL)}`
       );
       stateSwicher("day");
       setLocalStorage("day", data.begin, data.end);
     } else {
       console.log(
-        "It is either before ${data.begin.toLocaleString(DateTime.DATETIME_FULL)} \
-         or after ${data.end.toLocaleString(DateTime.DATETIME_FULL)}"
+        `It is either before ${data.begin.toLocaleString(
+          DateTime.DATETIME_FULL
+        )} or after ${data.end.toLocaleString(DateTime.DATETIME_FULL)}`
       );
 
       stateSwicher("night");
@@ -152,7 +152,8 @@ const setState = () => {
   }
 
   let cacheUntilEnd: DateTime;
-  if (cache !== undefined) cacheUntilEnd = DateTime.fromISO(cache.until); // parse ISO strings
+  // tslint:disable-next-line:triple-equals
+  if (cache != undefined) cacheUntilEnd = DateTime.fromISO(cache.until); // parse ISO strings
   if (now < cacheUntilEnd) {
     console.log("Cache indicated state should not change.");
     stateSwicher(cache.state);
