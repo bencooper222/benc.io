@@ -25,11 +25,11 @@ function addArrays(arrays: HTMLElement[][]): HTMLElement[] {
       rtn.push(arrays[i][j]);
     }
   }
-  console.log(rtn);
+
   return rtn;
 }
 
-function colorToChangeElements() {
+function colorToChangeElements(): HTMLElement[] {
   const icons = Array.prototype.slice.call(document.getElementsByTagName("i"), 0);
   const svgs = Array.prototype.slice.call(document.getElementsByClassName("not-fa"), 0);
 
