@@ -98,10 +98,8 @@ const calculateCorrectState = () => {
     const now: DateTime = DateTime.local();
     if (now > data.begin && now < data.end) {
       console.log(
-        "It is between: " +
-          data.begin.toLocaleString(DateTime.DATETIME_FULL) +
-          " and " +
-          data.end.toLocaleString(DateTime.DATETIME_FULL)
+        "It is between: ${data.begin.toLocaleString(DateTime.DATETIME_FULL)} \
+         and ${data.end.toLocaleString(DateTime.DATETIME_FULL)}"
       );
       stateSwicher("day");
       setLocalStorage("day", data.begin, data.end);
