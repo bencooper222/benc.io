@@ -100,7 +100,7 @@
     // These should be done automatically by a formatter. https://github.com/Microsoft/TypeScript/issues/18340
     "align": false,
     "eofline": false,
-    "max-line-length": false,
+    "max-line-length": [true, 100],
     "no-consecutive-blank-lines": false,
     "space-before-function-paren": false,
 

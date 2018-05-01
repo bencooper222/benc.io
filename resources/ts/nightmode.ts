@@ -3,13 +3,13 @@ declare var process: any;
 import SunCalc from "suncalc";
 import { DateTime } from "luxon";
 
+// declares what the cache will look like
 interface Cache {
   state: string;
   until: string;
   then: string;
   tz: string;
 }
-
 
 const ENABLE_CACHE =
   // tslint:disable-next-line:triple-equals
@@ -31,8 +31,14 @@ function addArrays(arrays: HTMLElement[][]): HTMLElement[] {
 }
 
 function colorToChangeElements(): HTMLElement[] {
-  const icons = Array.prototype.slice.call(document.getElementsByTagName("i"), 0);
-  const svgs = Array.prototype.slice.call(document.getElementsByClassName("not-fa"), 0);
+  const icons = Array.prototype.slice.call(
+    document.getElementsByTagName("i"),
+    0
+  );
+  const svgs = Array.prototype.slice.call(
+    document.getElementsByClassName("not-fa"),
+    0
+  );
 
   const h2 = Array.prototype.slice.call(document.getElementsByTagName("h2"), 0);
   const h3 = Array.prototype.slice.call(document.getElementsByTagName("h3"), 0);
@@ -40,7 +46,7 @@ function colorToChangeElements(): HTMLElement[] {
   return addArrays([icons, h2, h3, svgs]);
 }
 
-const makeDefinedPeriod = period => {
+const makeDefinedPeriod = (period: string) => {
   let isNight = false;
 
   if (period === "night") {
@@ -56,7 +62,10 @@ const makeDefinedPeriod = period => {
   }
 };
 
-const getSunriseSunsetTimes = () => {
+const getSunriseSunsetTimes = (): Promise<{
+  begin: DateTime;
+  end: DateTime;
+}> => {
   return fetch("https://freegeoip.net/json/")
     .then(location => {
       return location.json();
@@ -72,8 +81,8 @@ const getSunriseSunsetTimes = () => {
     })
     .then(data => {
       // const format = '';
-      const civilBegin = DateTime.fromISO(data.start.toISOString());
-      const civilEnd = DateTime.fromISO(data.stop.toISOString());
+      const civilBegin: DateTime = DateTime.fromISO(data.start.toISOString());
+      const civilEnd: DateTime = DateTime.fromISO(data.stop.toISOString());
 
       const civilTimes = {
         begin: civilBegin,
@@ -86,7 +95,7 @@ const getSunriseSunsetTimes = () => {
 
 const calculateCorrectState = () => {
   getSunriseSunsetTimes().then(function(data) {
-    const now = DateTime.local();
+    const now: DateTime = DateTime.local();
     if (now > data.begin && now < data.end) {
       console.log(
         "It is between: " +
@@ -98,10 +107,8 @@ const calculateCorrectState = () => {
       setLocalStorage("day", data.begin, data.end);
     } else {
       console.log(
-        "It is either before " +
-          data.begin.toLocaleString(DateTime.DATETIME_FULL) +
-          " or after " +
-          data.end.toLocaleString(DateTime.DATETIME_FULL)
+        "It is either before ${data.begin.toLocaleString(DateTime.DATETIME_FULL)} \
+         or after ${data.end.toLocaleString(DateTime.DATETIME_FULL)}"
       );
 
       stateSwicher("night");
@@ -113,14 +120,12 @@ const calculateCorrectState = () => {
 const setState = () => {
   let cache: Cache;
 
-  const now = DateTime.local(); // used later in code
+  const now: DateTime = DateTime.local(); // used later in code
   try {
     // checks constant to see if it should cache
     cache = ENABLE_CACHE
       ? JSON.parse(localStorage.getItem("state"))
       : undefined;
-
-
   } catch (err) {
     console.log("Cache parsing failed, manual calculations");
     calculateCorrectState();
@@ -160,7 +165,7 @@ const setState = () => {
   }
 };
 
-const stateSwicher = state => {
+const stateSwicher = (state: string) => {
   switch (state) {
     case "day":
       makeDefinedPeriod("day");
@@ -175,7 +180,11 @@ const stateSwicher = state => {
   }
 };
 
-const setLocalStorage = (state, startDayTime, endDayTime) => {
+const setLocalStorage = (
+  state: string,
+  startDayTime: DateTime,
+  endDayTime: DateTime
+) => {
   if (!ENABLE_CACHE) return; // env variable
   const toStore: Cache = <Cache>{};
   const now = DateTime.local();
