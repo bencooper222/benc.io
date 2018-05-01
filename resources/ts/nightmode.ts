@@ -111,6 +111,7 @@ const calculateCorrectState = () => {
 
 const setState = () => {
   let cache: Cache;
+
   const now = DateTime.local(); // used later in code
   try {
     // checks constant to see if it should cache
@@ -125,7 +126,8 @@ const setState = () => {
     return;
   }
 
-  if (cache === undefined) {
+  // tslint:disable-next-line:triple-equals
+  if (cache == undefined) {
     if (ENABLE_CACHE) {
       console.log("No cache, manual calculations");
     } else {
