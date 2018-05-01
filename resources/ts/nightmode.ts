@@ -12,7 +12,8 @@ interface Cache {
 
 
 const ENABLE_CACHE =
-  process.env.ENABLE_CACHE === undefined
+  // tslint:disable-next-line:triple-equals
+  process.env.ENABLE_CACHE == undefined
     ? true
     : process.env.ENABLE_CACHE === "true";
 
@@ -126,6 +127,7 @@ const setState = () => {
     return;
   }
 
+  // loose equality needed
   // tslint:disable-next-line:triple-equals
   if (cache == undefined) {
     if (ENABLE_CACHE) {
