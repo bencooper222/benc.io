@@ -1,4 +1,4 @@
-declare var process: any;
+declare const process: any;
 
 import SunCalc from "suncalc";
 import { DateTime } from "luxon";
@@ -94,7 +94,7 @@ const getSunriseSunsetTimes = (): Promise<{
 };
 
 const calculateCorrectState = () => {
-  getSunriseSunsetTimes().then(function(data) {
+  getSunriseSunsetTimes().then((data) => {
     const now: DateTime = DateTime.local();
     if (now > data.begin && now < data.end) {
       console.log(

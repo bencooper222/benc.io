@@ -28,8 +28,8 @@
     "dev:cache": "export ENABLE_CACHE=true && parcel index.html",
     "dev:nocache": "export ENABLE_CACHE=false && parcel index.html",
     "prod": "parcel build index.html -d build/ --public-url ./ && cp keybase.txt security.txt build",
-    "sass-lint": "sass-lint --verbose",
-    "sass-lint:fix": "sass-lint-auto-fix --verbose",
+    "sass-lint": "sass-lint --verbose -c .sass-lint.yml",
+    "sass-lint:fix": "sass-lint-auto-fix --verbose -c .sass-lint.yml",
     "tslint": "tslint -p ./tslint.json --fix",
     "tslint:nofix": "tslint -p ./tslint.json"
   },
