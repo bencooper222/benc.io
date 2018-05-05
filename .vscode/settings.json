@@ -4,7 +4,7 @@
     "eslint.run": "onSave",
     "tslint.packageManager": "yarn",
     "tslint.enable": true,
-    "tslint.autoFixOnSave": true
+    "tslint.autoFixOnSave": true,
     "eslint.enable": true,
     "eslint.packageManager": "yarn"
 }
