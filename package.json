@@ -27,7 +27,7 @@
     "dev": "echo 'Defaulting to cache enabled' && export ENABLE_CACHE=true && parcel index.html",
     "dev:cache": "export ENABLE_CACHE=true && parcel index.html",
     "dev:nocache": "export ENABLE_CACHE=false && parcel index.html",
-    "prod": "parcel build index.html -d build/ --public-url ./ && cp keybase.txt security.txt build",
+    "prod": "parcel build index.html -d build/ --public-url ./ && cp text-files/keybase.txt text-files/security.txt build",
     "sass-lint": "sass-lint --verbose -c .sass-lint.yml",
     "sass-lint:fix": "sass-lint-auto-fix --verbose -c .sass-lint.yml",
     "tslint": "tslint -p ./tslint.json --fix",
