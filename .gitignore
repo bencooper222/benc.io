@@ -68,3 +68,6 @@ build/
 
 # parcel dev
 dist/
+
+# list of articles actually used - should be created at transpile-time
+resources/articles.use.json

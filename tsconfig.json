@@ -2,4 +2,5 @@
     "include": [
         "resources/ts/*" // only including this here because tslint needs it.
     ]
+
 }
