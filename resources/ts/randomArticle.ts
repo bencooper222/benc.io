@@ -6,7 +6,7 @@ declare module "*.json" {
   export default value;
 }
 
-const articleLinks = process.env.NODE_ENV==='production' ? require('../articles.min.json'): require('../articles.json');
+import articleLinks from "../articles.use.json";
 
 
 

@@ -42,7 +42,7 @@ const minifyArticles = async () => {
   });
 
   sequence.on('end', () => fs_writeFile(
-      'resources/articles.min.json',
+      'resources/articles.use.json',
       JSON.stringify(minArticles),
       'utf8',
     ).then(()=>{
