@@ -1,18 +1,13 @@
-declare const process: any;
-declare const require: any;
-
-declare module "*.json" {
+declare module '*.json' {
   const value: any;
   export default value;
 }
 
-import articleLinks from "../articles.use.json";
-
-
+import articleLinks from '../articles.use.json';
 
 let articleLinksTemp: string[] = articleLinks;
 const link: HTMLLinkElement = document.getElementById(
-  'link',
+  'link'
 ) as HTMLLinkElement;
 link.target = '_blank';
 

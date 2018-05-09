@@ -4,7 +4,7 @@ import { DateTime } from 'luxon';
 import SunCalc from 'suncalc';
 
 // declares what the cache will look like
-interface Cache {
+interface ICache {
   state: string;
   until: string;
   then: string;
@@ -33,11 +33,11 @@ function addArrays(arrays: HTMLElement[][]): HTMLElement[] {
 function colorToChangeElements(): HTMLElement[] {
   const icons = Array.prototype.slice.call(
     document.getElementsByTagName('i'),
-    0,
+    0
   );
   const svgs = Array.prototype.slice.call(
     document.getElementsByClassName('not-fa'),
-    0,
+    0
   );
 
   const h2 = Array.prototype.slice.call(document.getElementsByTagName('h2'), 0);
@@ -67,26 +67,26 @@ const getSunriseSunsetTimes = (): Promise<{
   end: DateTime;
 }> => {
   return fetch('https://freegeoip.net/json/')
-    .then((location) => {
+    .then(location => {
       return location.json();
     })
-    .then((coords) => {
+    .then(coords => {
       const sunTimes = SunCalc.getTimes(
         new Date(),
         coords.latitude,
-        coords.longitude,
+        coords.longitude
       );
 
       return { start: sunTimes.dawn, stop: sunTimes.sunset };
     })
-    .then((data) => {
+    .then(data => {
       // const format = '';
       const civilBegin: DateTime = DateTime.fromISO(data.start.toISOString());
       const civilEnd: DateTime = DateTime.fromISO(data.stop.toISOString());
 
       const civilTimes = {
         begin: civilBegin,
-        end: civilEnd,
+        end: civilEnd
       };
 
       return civilTimes;
@@ -94,21 +94,21 @@ const getSunriseSunsetTimes = (): Promise<{
 };
 
 const calculateCorrectState = () => {
-  getSunriseSunsetTimes().then((data) => {
+  getSunriseSunsetTimes().then(data => {
     const now: DateTime = DateTime.local();
     if (now > data.begin && now < data.end) {
       console.log(
         `It is between: ${data.begin.toLocaleString(
-          DateTime.DATETIME_FULL,
-        )} and ${data.end.toLocaleString(DateTime.DATETIME_FULL)}`,
+          DateTime.DATETIME_FULL
+        )} and ${data.end.toLocaleString(DateTime.DATETIME_FULL)}`
       );
       stateSwicher('day');
       setLocalStorage('day', data.begin, data.end);
     } else {
       console.log(
         `It is either before ${data.begin.toLocaleString(
-          DateTime.DATETIME_FULL,
-        )} or after ${data.end.toLocaleString(DateTime.DATETIME_FULL)}`,
+          DateTime.DATETIME_FULL
+        )} or after ${data.end.toLocaleString(DateTime.DATETIME_FULL)}`
       );
 
       stateSwicher('night');
@@ -118,7 +118,7 @@ const calculateCorrectState = () => {
 };
 
 const setState = () => {
-  let cache: Cache;
+  let cache: ICache;
 
   const now: DateTime = DateTime.local(); // used later in code
   try {
@@ -161,7 +161,7 @@ const setState = () => {
     stateSwicher(cache.state);
   } else {
     console.log(
-      'Cache indicated state should change. Using designated new state and recalculating cache',
+      'Cache indicated state should change. Using designated new state and recalculating cache'
     );
     stateSwicher(cache.then);
     calculateCorrectState();
@@ -186,12 +186,12 @@ const stateSwicher = (state: string) => {
 const setLocalStorage = (
   state: string,
   startDayTime: DateTime,
-  endDayTime: DateTime,
+  endDayTime: DateTime
 ) => {
   if (!ENABLE_CACHE) {
     return;
   } // env variable
-  const toStore: Cache = {} as Cache;
+  const toStore: ICache = {} as ICache;
   const now = DateTime.local();
   toStore.tz = startDayTime.zoneName;
   if (state === 'day') {
