@@ -3,8 +3,7 @@
     "sasslint.run": "onSave",
     "eslint.run": "onSave",
     "tslint.packageManager": "yarn",
-    "tslint.enable": true,
-    "tslint.autoFixOnSave": true,
+    "tslint.enable": false,
     "eslint.enable": true,
     "eslint.packageManager": "yarn"
 }

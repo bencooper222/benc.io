@@ -27,7 +27,9 @@ const articleLinks = [
 ]; // who needs config variables?
 
 let articleLinksTemp: string[] = articleLinks;
-const link: HTMLLinkElement = <HTMLLinkElement>document.getElementById("link");
+const link: HTMLLinkElement = document.getElementById(
+  "link"
+) as HTMLLinkElement;
 link.target = "_blank";
 
 const randomPick = () => {

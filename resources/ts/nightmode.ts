@@ -1,7 +1,7 @@
 declare const process: any;
 
-import SunCalc from "suncalc";
-import { DateTime } from "luxon";
+import { DateTime } from 'luxon';
+import SunCalc from 'suncalc';
 
 // declares what the cache will look like
 interface Cache {
@@ -15,7 +15,7 @@ const ENABLE_CACHE =
   // tslint:disable-next-line:triple-equals
   process.env.ENABLE_CACHE == undefined
     ? true
-    : process.env.ENABLE_CACHE === "true";
+    : process.env.ENABLE_CACHE === 'true';
 
 function addArrays(arrays: HTMLElement[][]): HTMLElement[] {
   // arrays is an array of arrays
@@ -32,16 +32,16 @@ function addArrays(arrays: HTMLElement[][]): HTMLElement[] {
 
 function colorToChangeElements(): HTMLElement[] {
   const icons = Array.prototype.slice.call(
-    document.getElementsByTagName("i"),
-    0
+    document.getElementsByTagName('i'),
+    0,
   );
   const svgs = Array.prototype.slice.call(
-    document.getElementsByClassName("not-fa"),
-    0
+    document.getElementsByClassName('not-fa'),
+    0,
   );
 
-  const h2 = Array.prototype.slice.call(document.getElementsByTagName("h2"), 0);
-  const h3 = Array.prototype.slice.call(document.getElementsByTagName("h3"), 0);
+  const h2 = Array.prototype.slice.call(document.getElementsByTagName('h2'), 0);
+  const h3 = Array.prototype.slice.call(document.getElementsByTagName('h3'), 0);
 
   return addArrays([icons, h2, h3, svgs]);
 }
@@ -49,16 +49,16 @@ function colorToChangeElements(): HTMLElement[] {
 const makeDefinedPeriod = (period: string) => {
   let isNight = false;
 
-  if (period === "night") {
+  if (period === 'night') {
     isNight = true;
   }
   // defaults day
   for (let i = 0; i < changeBackground.length; i++) {
-    changeBackground[i].style.backgroundColor = isNight ? "black" : "white";
+    changeBackground[i].style.backgroundColor = isNight ? 'black' : 'white';
   }
 
   for (let i = 0; i < changeColor.length; i++) {
-    changeColor[i].style.color = isNight ? "white" : "black";
+    changeColor[i].style.color = isNight ? 'white' : 'black';
   }
 };
 
@@ -66,27 +66,27 @@ const getSunriseSunsetTimes = (): Promise<{
   begin: DateTime;
   end: DateTime;
 }> => {
-  return fetch("https://freegeoip.net/json/")
-    .then(location => {
+  return fetch('https://freegeoip.net/json/')
+    .then((location) => {
       return location.json();
     })
-    .then(coords => {
+    .then((coords) => {
       const sunTimes = SunCalc.getTimes(
         new Date(),
         coords.latitude,
-        coords.longitude
+        coords.longitude,
       );
 
       return { start: sunTimes.dawn, stop: sunTimes.sunset };
     })
-    .then(data => {
+    .then((data) => {
       // const format = '';
       const civilBegin: DateTime = DateTime.fromISO(data.start.toISOString());
       const civilEnd: DateTime = DateTime.fromISO(data.stop.toISOString());
 
       const civilTimes = {
         begin: civilBegin,
-        end: civilEnd
+        end: civilEnd,
       };
 
       return civilTimes;
@@ -99,20 +99,20 @@ const calculateCorrectState = () => {
     if (now > data.begin && now < data.end) {
       console.log(
         `It is between: ${data.begin.toLocaleString(
-          DateTime.DATETIME_FULL
-        )} and ${data.end.toLocaleString(DateTime.DATETIME_FULL)}`
+          DateTime.DATETIME_FULL,
+        )} and ${data.end.toLocaleString(DateTime.DATETIME_FULL)}`,
       );
-      stateSwicher("day");
-      setLocalStorage("day", data.begin, data.end);
+      stateSwicher('day');
+      setLocalStorage('day', data.begin, data.end);
     } else {
       console.log(
         `It is either before ${data.begin.toLocaleString(
-          DateTime.DATETIME_FULL
-        )} or after ${data.end.toLocaleString(DateTime.DATETIME_FULL)}`
+          DateTime.DATETIME_FULL,
+        )} or after ${data.end.toLocaleString(DateTime.DATETIME_FULL)}`,
       );
 
-      stateSwicher("night");
-      setLocalStorage("night", data.begin, data.end);
+      stateSwicher('night');
+      setLocalStorage('night', data.begin, data.end);
     }
   });
 };
@@ -124,10 +124,10 @@ const setState = () => {
   try {
     // checks constant to see if it should cache
     cache = ENABLE_CACHE
-      ? JSON.parse(localStorage.getItem("state"))
+      ? JSON.parse(localStorage.getItem('state'))
       : undefined;
   } catch (err) {
-    console.log("Cache parsing failed, manual calculations");
+    console.log('Cache parsing failed, manual calculations');
     calculateCorrectState();
     return;
   }
@@ -136,9 +136,9 @@ const setState = () => {
   // tslint:disable-next-line:triple-equals
   if (cache == undefined) {
     if (ENABLE_CACHE) {
-      console.log("No cache, manual calculations");
+      console.log('No cache, manual calculations');
     } else {
-      console.log("ENABLE_CACHE is set to false, manual calculations");
+      console.log('ENABLE_CACHE is set to false, manual calculations');
     }
 
     calculateCorrectState();
@@ -146,20 +146,22 @@ const setState = () => {
   }
 
   if (now.zoneName !== cache.tz) {
-    console.log("Cache indicated changed timezone.");
+    console.log('Cache indicated changed timezone.');
     calculateCorrectState();
     return;
   }
 
   let cacheUntilEnd: DateTime;
   // tslint:disable-next-line:triple-equals
-  if (cache != undefined) cacheUntilEnd = DateTime.fromISO(cache.until); // parse ISO strings
+  if (cache != undefined) {
+    cacheUntilEnd = DateTime.fromISO(cache.until);
+  } // parse ISO strings
   if (now < cacheUntilEnd) {
-    console.log("Cache indicated state should not change.");
+    console.log('Cache indicated state should not change.');
     stateSwicher(cache.state);
   } else {
     console.log(
-      "Cache indicated state should change. Using designated new state and recalculating cache"
+      'Cache indicated state should change. Using designated new state and recalculating cache',
     );
     stateSwicher(cache.then);
     calculateCorrectState();
@@ -168,11 +170,11 @@ const setState = () => {
 
 const stateSwicher = (state: string) => {
   switch (state) {
-    case "day":
-      makeDefinedPeriod("day");
+    case 'day':
+      makeDefinedPeriod('day');
       break;
-    case "night":
-      makeDefinedPeriod("night");
+    case 'night':
+      makeDefinedPeriod('night');
       break;
     default:
       // recalculate included
@@ -184,32 +186,34 @@ const stateSwicher = (state: string) => {
 const setLocalStorage = (
   state: string,
   startDayTime: DateTime,
-  endDayTime: DateTime
+  endDayTime: DateTime,
 ) => {
-  if (!ENABLE_CACHE) return; // env variable
-  const toStore: Cache = <Cache>{};
+  if (!ENABLE_CACHE) {
+    return;
+  } // env variable
+  const toStore: Cache = {} as Cache;
   const now = DateTime.local();
   toStore.tz = startDayTime.zoneName;
-  if (state === "day") {
-    toStore.state = "day";
+  if (state === 'day') {
+    toStore.state = 'day';
     toStore.until = endDayTime.toISO();
-    toStore.then = "night";
-  } else if (state === "night") {
+    toStore.then = 'night';
+  } else if (state === 'night') {
     if (now < endDayTime) {
-      toStore.state = "night";
+      toStore.state = 'night';
       toStore.until = startDayTime.toISO();
-      toStore.then = "day";
+      toStore.then = 'day';
     } else {
-      toStore.state = "night";
-      toStore.until = now.endOf("day").toISO();
-      toStore.then = "recalculate";
+      toStore.state = 'night';
+      toStore.until = now.endOf('day').toISO();
+      toStore.then = 'recalculate';
     }
   }
 
-  localStorage.setItem("state", JSON.stringify(toStore));
+  localStorage.setItem('state', JSON.stringify(toStore));
 };
 
-const changeBackground = document.getElementsByTagName("body");
+const changeBackground = document.getElementsByTagName('body');
 const changeColor = colorToChangeElements();
 
 setState();
