@@ -11,7 +11,7 @@ h1 {
   -webkit-margin-after: 0.2em;
   -webkit-margin-before: 0.2em;
   color: #639;
-  font-family: "Roboto Slab", serif;
+  font-family: 'Roboto Slab', serif;
   font-size: 4.5em;
   font-weight: 400;
   margin-bottom: 0px;
@@ -19,7 +19,7 @@ h1 {
 }
 h2,
 h3 {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   margin-bottom: 0px;
   margin-top: 0px;
@@ -93,7 +93,7 @@ svg.not-fa {
   width: 2em;
 }
 svg.not-fa::before {
-  content: "\f003";
+  content: '\f003';
 }
 span.strike {
   text-decoration: line-through;

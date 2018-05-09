@@ -27,11 +27,13 @@
       "export ENABLE_CACHE=false && cp resources/articles.json resources/articles.use.json && parcel index.html",
     "prod":
       "export NODE_ENV=production && node bundle.js && cp text-files/keybase.txt text-files/security.txt build",
-    "sass-lint": "sass-lint --verbose -c .sass-lint.yml",
-    "sass-lint:fix": "sass-lint-auto-fix --verbose -c .sass-lint.yml",
     "tslint": "tslint -c tslint.json 'resources/ts/**/*.ts' --fix",
     "tslint:nofix": "tslint -p ./tslint.json",
-    "eslint": "eslint"
+    "eslint": "eslint bundle.js resources/js --ext .js, --fix",
+    "eslint:nofix": "eslint bundle.js resources/js/ --ext .js",
+    "sasslint": "prettier resources/css/home.scss --write",
+    "sasslint:nofix": "prettier resources/css/home.scss",
+    "lint:fix": "yarn eslint && yarn tslint && yarn sasslint"
   },
   "dependencies": {
     "@lvchengbin/sequence": "^1.1.0",
@@ -53,8 +55,6 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-prettier": "^2.6.0",
     "prettier": "^1.11.1",
-    "sass-lint": "^1.12.1",
-    "sass-lint-auto-fix": "^0.2.6",
     "tslint": "^5.9.1",
     "tslint-config-airbnb": "^5.8.0",
     "tslint-plugin-prettier": "^1.3.0",
