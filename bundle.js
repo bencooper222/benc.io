@@ -34,6 +34,7 @@ const minifyArticles = async () => {
       minArticles.push(data.value); // we just push the normal value if one fails
       console.log(`${data.value} was not minimized`);
     }
+
     console.log(
       index % 4 === 0 ? `${index + 1} of ${oldArticles.length} complete` : ''
     );

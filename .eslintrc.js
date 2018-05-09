@@ -13,6 +13,8 @@ module.exports = {
     ecmaVersion: 8
   },
   rules: {
-    'no-console': 0
+    'no-console': 0,
+    "prettier/prettier": "error"
+
   }
 };
