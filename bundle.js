@@ -29,7 +29,7 @@ const minifyArticles = async () => {
   // This runs every time bit.ly responds - even with a not 200 status code
   sequence.on('success', (data, index) => {
     try {
-      minArticles.push(data.value.data.url);
+      minArticles.push(data.value.data.url.substring(0,5)==='https' ? data.value.data.url : `https${  data.value.data.url.substring(4)}`);
     } catch (err) {
       minArticles.push(data.value); // we just push the normal value if one fails
       console.log(`${data.value} was not minimized`);
