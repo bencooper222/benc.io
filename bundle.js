@@ -39,7 +39,7 @@ const minifyArticles = async () => {
     }
 
     console.log(
-      index % 4 === 0 ? `${index + 1} of ${oldArticles.length} complete` : ''
+      index % 4 === 0 ? `${index + 1} of ${oldArticles.length} complete.` : ''
     );
   });
 
