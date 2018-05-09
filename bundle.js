@@ -22,13 +22,16 @@ const minifyArticles = async () => {
   const oldArticles = JSON.parse(
     fs.readFileSync('resources/articles.json', 'utf8')
   );
+
   const minArticles = [];
   const sequence = new Sequence();
+
+  // This runs every time bit.ly responds - even with a not 200 status code
   sequence.on('success', (data, index) => {
     try {
       minArticles.push(data.value.data.url);
     } catch (err) {
-      minArticles.push(data.value);
+      minArticles.push(data.value); // we just push the normal value if one fails
       console.log(`${data.value} was not minimized`);
     }
     console.log(
@@ -36,11 +39,13 @@ const minifyArticles = async () => {
     );
   });
 
+  // this runs every time the Promise itself fails - usually an API token misconfig
   sequence.on('failed', (data, index) => {
     console.log(data, index);
     // execute when each step in sequence failed
   });
 
+  // this runs after every link has beeen retrieved from bit.ly
   sequence.on('end', () =>
     fs_writeFile(
       'resources/articles.use.json',
