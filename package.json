@@ -27,15 +27,18 @@
     "dev": "echo 'Defaulting to cache enabled' && export ENABLE_CACHE=true && parcel index.html",
     "dev:cache": "export ENABLE_CACHE=true && parcel index.html",
     "dev:nocache": "export ENABLE_CACHE=false && parcel index.html",
-    "prod": "node index.js && cp text-files/keybase.txt text-files/security.txt build",
+    "prod": "export NODE_ENV=production && node index.js && cp text-files/keybase.txt text-files/security.txt build",
     "sass-lint": "sass-lint --verbose -c .sass-lint.yml",
     "sass-lint:fix": "sass-lint-auto-fix --verbose -c .sass-lint.yml",
     "tslint": "tslint -c tslint.json 'resources/ts/**/*.ts' --fix",
-    "tslint:nofix": "tslint -p ./tslint.json"
+    "tslint:nofix": "tslint -p ./tslint.json",
+    "eslint": "eslint"
   },
   "dependencies": {
+    "@lvchengbin/sequence": "^1.1.0",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "bitly": "^5.0.12",
     "luxon": "^1.2.0",
     "node-sass": "^4.7.2",
     "parcel-bundler": "^1.7.0",
@@ -44,9 +47,11 @@
   },
   "devDependencies": {
     "@types/luxon": "^0.5.2",
-    "eslint": "^4.19.1",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-html": "^4.0.2",
+    "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-prettier": "^2.6.0",
     "prettier": "^1.11.1",
     "sass-lint": "^1.12.1",
@@ -57,5 +62,8 @@
     "typescript-eslint-parser": "^15.0.0"
   },
   "postinstall": "npm rebuild node-sass",
-  "sasslintConfig": ".sass-lint.yml"
+  "sasslintConfig": ".sass-lint.yml",
+  "prettier": {
+    "singleQuote": true
+  }
 }
