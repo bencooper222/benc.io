@@ -2,12 +2,7 @@
   "name": "benc.io",
   "version": "1.0.0",
   "description": "Personal website of Ben Cooper",
-  "keywords": [
-    "Personal Website",
-    "Ben Cooper",
-    "benc.io",
-    "Netlify"
-  ],
+  "keywords": ["Personal Website", "Ben Cooper", "benc.io", "Netlify"],
   "engines": {
     "node": ">=8",
     "yarn": ">= 1.5.0"
@@ -24,10 +19,14 @@
   "repository": "https://github.com/bencooper222/benc.io.git",
   "license": "Unlicense",
   "scripts": {
-    "dev": "echo 'Defaulting to cache enabled' && export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
-    "dev:cache": "export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
-    "dev:nocache": "export ENABLE_CACHE=false && cp resources/articles.json resources/articles.use.json && parcel index.html",
-    "prod": "export NODE_ENV=production && node bundle.js && cp text-files/keybase.txt text-files/security.txt build",
+    "dev":
+      "echo 'Defaulting to cache enabled' && export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
+    "dev:cache":
+      "export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
+    "dev:nocache":
+      "export ENABLE_CACHE=false && cp resources/articles.json resources/articles.use.json && parcel index.html",
+    "prod":
+      "export NODE_ENV=production && node bundle.js && cp text-files/keybase.txt text-files/security.txt build",
     "tslint": "tslint -c tslint.json 'resources/ts/**/*.ts' --fix",
     "tslint:nofix": "tslint -p ./tslint.json",
     "eslint": "eslint bundle.js resources/js --ext .js, --fix",
