@@ -8,6 +8,10 @@ const util = require('util');
 const fs_writeFile = util.promisify(fs.writeFile); // eslint-disable-line camelcase
 const Sequence = require('@lvchengbin/sequence'); // probably unnecessary but makes life easiers
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config(); // eslint-disable-line import/no-extraneous-dependencies, global-require
+}
+
 const website = path.join(__dirname, './index.html');
 
 const parcelOptions = {
@@ -39,7 +43,9 @@ const minifyArticles = async () => {
     }
 
     console.log(
-      index % 4 === 0 ? `${index + 1} of ${oldArticles.length} complete.` : ''
+      index % 4 === 0 || index + 1 === oldArticles.length
+        ? `${index + 1} of ${oldArticles.length} complete.`
+        : ''
     );
   });
 
@@ -47,6 +53,18 @@ const minifyArticles = async () => {
   sequence.on('failed', (data, index) => {
     console.log(data, index);
     // execute when each step in sequence failed
+  });
+
+  oldArticles.forEach(article => {
+    const articleMinifier = async () => {
+      try {
+        return await bitly.shorten(article);
+      } catch (e) {
+        console.log(e);
+        return article;
+      }
+    };
+    sequence.append(articleMinifier);
   });
 
   // this runs after every link has beeen retrieved from bit.ly
@@ -60,18 +78,6 @@ const minifyArticles = async () => {
       bundler.bundle();
     })
   );
-
-  oldArticles.forEach(article => {
-    const articleMinifier = async () => {
-      try {
-        return await bitly.shorten(article);
-      } catch (e) {
-        console.log(e);
-        return article;
-      }
-    };
-    sequence.append(articleMinifier);
-  });
 };
 
 minifyArticles();

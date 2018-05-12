@@ -2,6 +2,11 @@
   "defaultSeverity": "warning",
   "extends": ["tslint:recommended", "tslint-plugin-prettier"],
   "jsRules": {},
-  "rules": { "no-console": false, "prettier": true, "quotemark":[true,"single"]},
+  "rules": {
+    "no-console": false,
+    "prettier": true,
+    "quotemark": [true, "single"],
+    "linebreak-style": [true, "LF"]
+  },
   "rulesDirectory": []
 }
