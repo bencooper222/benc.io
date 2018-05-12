@@ -8,6 +8,10 @@ const util = require('util');
 const fs_writeFile = util.promisify(fs.writeFile); // eslint-disable-line camelcase
 const Sequence = require('@lvchengbin/sequence');
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config(); // eslint-disable-line import/no-extraneous-dependencies, global-require
+}
+
 const website = path.join(__dirname, './index.html');
 
 const parcelOptions = {
@@ -51,18 +55,6 @@ const minifyArticles = async () => {
     // execute when each step in sequence failed
   });
 
-  // this runs after every link has beeen retrieved from bit.ly
-  sequence.on('end', () =>
-    fs_writeFile(
-      'resources/articles.use.json',
-      JSON.stringify(minArticles),
-      'utf8'
-    ).then(() => {
-      const bundler = new Parcel(website, parcelOptions);
-      bundler.bundle();
-    })
-  );
-
   oldArticles.forEach(article => {
     const articleMinifier = async () => {
       try {
@@ -74,6 +66,18 @@ const minifyArticles = async () => {
     };
     sequence.append(articleMinifier);
   });
+
+  // this runs after every link has beeen retrieved from bit.ly
+  sequence.on('end', () =>
+    fs_writeFile(
+      'resources/articles.use.json',
+      JSON.stringify(minArticles),
+      'utf8'
+    ).then(() => {
+      const bundler = new Parcel(website, parcelOptions);
+      bundler.bundle();
+    })
+  );
 };
 
 minifyArticles();

@@ -14,7 +14,8 @@ module.exports = {
   },
   rules: {
     'no-console': 0,
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "linebreak-style":["error", "unix"]
 
   }
 };

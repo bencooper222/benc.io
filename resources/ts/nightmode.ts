@@ -20,10 +20,9 @@ const ENABLE_CACHE =
 function addArrays(arrays: HTMLElement[][]): HTMLElement[] {
   // arrays is an array of arrays
   const rtn = [];
-
-  for (let i = 0; i < arrays.length; i++) {
-    for (let j = 0; j < arrays[i].length; j++) {
-      rtn.push(arrays[i][j]);
+  for (const elementType of arrays) {
+    for (const element of elementType) {
+      rtn.push(element);
     }
   }
 
@@ -47,18 +46,16 @@ function colorToChangeElements(): HTMLElement[] {
 }
 
 const makeDefinedPeriod = (period: string) => {
-  let isNight = false;
+  const isNight = period === 'night' ? true : false;
 
-  if (period === 'night') {
-    isNight = true;
-  }
-  // defaults day
-  for (let i = 0; i < changeBackground.length; i++) {
-    changeBackground[i].style.backgroundColor = isNight ? 'black' : 'white';
+  for (const backgroundElement of Array.prototype.slice.call(
+    changeBackground
+  )) {
+    backgroundElement.style.backgroundColor = isNight ? 'black' : 'white';
   }
 
-  for (let i = 0; i < changeColor.length; i++) {
-    changeColor[i].style.color = isNight ? 'white' : 'black';
+  for (const textElement of Array.prototype.slice.call(changeColor)) {
+    textElement.style.color = isNight ? 'white' : 'black';
   }
 };
 
