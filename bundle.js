@@ -6,7 +6,7 @@ const fs = require('fs');
 const util = require('util');
 
 const fs_writeFile = util.promisify(fs.writeFile); // eslint-disable-line camelcase
-const Sequence = require('@lvchengbin/sequence');
+const Sequence = require('@lvchengbin/sequence'); // probably unnecessary but makes life easiers
 
 const website = path.join(__dirname, './index.html');
 

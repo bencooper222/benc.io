@@ -11,8 +11,6 @@ interface ICache {
   tz: string;
 }
 
-
-
 const ENABLE_CACHE =
   // tslint:disable-next-line:triple-equals
   process.env.ENABLE_CACHE == undefined
@@ -20,7 +18,6 @@ const ENABLE_CACHE =
     : process.env.ENABLE_CACHE === 'true';
 
 function addArrays(arrays: HTMLElement[][]): HTMLElement[] {
-  // arrays is an array of arrays
   const rtn = [];
 
   for (let i = 0; i < arrays.length; i++) {
@@ -28,11 +25,10 @@ function addArrays(arrays: HTMLElement[][]): HTMLElement[] {
       rtn.push(arrays[i][j]);
     }
   }
-
   return rtn;
 }
 
-function colorToChangeElements(): HTMLElement[] {
+const colorToChangeElements = (): HTMLElement[] => {
   const icons = Array.prototype.slice.call(
     document.getElementsByTagName('i'),
     0,
@@ -46,15 +42,14 @@ function colorToChangeElements(): HTMLElement[] {
   const h3 = Array.prototype.slice.call(document.getElementsByTagName('h3'), 0);
 
   return addArrays([icons, h2, h3, svgs]);
-}
+};
 
 const makeDefinedPeriod = (period: string) => {
-  let isNight = false;
+  let isNight = false; // defaults day
 
   if (period === 'night') {
     isNight = true;
   }
-  // defaults day
   for (let i = 0; i < changeBackground.length; i++) {
     changeBackground[i].style.backgroundColor = isNight ? 'black' : 'white';
   }
@@ -82,22 +77,20 @@ const getSunriseSunsetTimes = (): Promise<{
       return { start: sunTimes.dawn, stop: sunTimes.sunset };
     })
     .then((data) => {
-      // const format = '';
-      const civilBegin: DateTime = DateTime.fromISO(data.start.toISOString());
-      const civilEnd: DateTime = DateTime.fromISO(data.stop.toISOString());
-
-      const civilTimes = {
-        begin: civilBegin,
-        end: civilEnd,
+      // the civil times are the times when stuff becomes visisble in the morning
+      // and mostly dark and invisible at night
+      return {
+        begin: DateTime.fromISO(data.start.toISOString()),
+        end: DateTime.fromISO(data.stop.toISOString()),
       };
-
-      return civilTimes;
     });
 };
 
 const calculateCorrectState = () => {
   getSunriseSunsetTimes().then((data) => {
     const now: DateTime = DateTime.local();
+
+    // if it's between civil dawn and twilight
     if (now > data.begin && now < data.end) {
       console.log(
         `It is between: ${data.begin.toLocaleString(
@@ -124,7 +117,7 @@ const setState = () => {
 
   const now: DateTime = DateTime.local(); // used later in code
   try {
-    // checks constant to see if it should cache
+    // checks cache to see if it should cache
     cache = ENABLE_CACHE
       ? JSON.parse(localStorage.getItem('state'))
       : undefined;
@@ -134,19 +127,22 @@ const setState = () => {
     return;
   }
 
-  // loose equality needed
+  // if no cache is there
   // tslint:disable-next-line:triple-equals
   if (cache == undefined) {
-    if (ENABLE_CACHE) {
-      console.log('No cache, manual calculations');
-    } else {
-      console.log('ENABLE_CACHE is set to false, manual calculations');
-    }
-
+    // if no cache
+    console.log(
+      ENABLE_CACHE
+        ? 'No cache, manual calculations'
+        : 'ENABLE_CACHE is set to false, manual calculations',
+    );
     calculateCorrectState();
     return;
   }
 
+  // start the part of the function where caching should happen
+
+  // if the timezone has been changed
   if (now.zoneName !== cache.tz) {
     console.log('Cache indicated changed timezone.');
     calculateCorrectState();
@@ -196,20 +192,22 @@ const setLocalStorage = (
   const toStore: ICache = {} as ICache;
   const now = DateTime.local();
   toStore.tz = startDayTime.zoneName;
-  if (state === 'day') {
-    toStore.state = 'day';
-    toStore.until = endDayTime.toISO();
-    toStore.then = 'night';
-  } else if (state === 'night') {
-    if (now < endDayTime) {
-      toStore.state = 'night';
-      toStore.until = startDayTime.toISO();
-      toStore.then = 'day';
-    } else {
-      toStore.state = 'night';
-      toStore.until = now.endOf('day').toISO();
-      toStore.then = 'recalculate';
-    }
+  switch (state) {
+    case 'day':
+      toStore.state = 'day';
+      toStore.until = endDayTime.toISO();
+      toStore.then = 'night';
+      break;
+    case 'night':
+      if (now < endDayTime) {
+        toStore.state = 'night';
+        toStore.until = startDayTime.toISO();
+        toStore.then = 'day';
+      } else {
+        toStore.state = 'night';
+        toStore.until = now.endOf('day').toISO();
+        toStore.then = 'recalculate';
+      }
   }
 
   localStorage.setItem('state', JSON.stringify(toStore));
