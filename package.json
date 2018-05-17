@@ -27,7 +27,7 @@
     "dev": "echo 'Defaulting to cache enabled' && export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
     "dev:cache": "export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
     "dev:nocache": "export ENABLE_CACHE=false && cp resources/articles.json resources/articles.use.json && parcel index.html",
-    "prod": "cd node_modules/parcel-bundler && yarn build && cd .. & cd .. & node bundle.js && cp text-files/keybase.txt text-files/security.txt build",
+    "prod": "cd node_modules/parcel-bundler && yarn install && yarn build && cd .. & cd .. & node bundle.js && cp text-files/keybase.txt text-files/security.txt build",
     "tslint": "tslint -c tslint.json 'resources/ts/**/*.ts' --fix",
     "tslint:nofix": "tslint -p ./tslint.json",
     "eslint": "eslint bundle.js resources/js --ext .js, --fix",
