@@ -18,9 +18,8 @@ const randomPick = () => {
   }
 
   // process to randomly select article
-  const rand: number = Math.floor(Math.random() * articleLinks.length);
-  const article: string = articleLinksTemp[rand];
-  link.href = article;
+  const rand: number = Math.floor(Math.random() * articleLinksTemp.length);
+  link.href = articleLinksTemp[rand];
 
   // add listener to change link onclick
 
