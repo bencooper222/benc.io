@@ -33,10 +33,6 @@ h3 {
 .shift-right {
   margin-left: 9%;
 }
-.icon-spacing {
-  //margin-left: 22px;
-  margin-right: 22px;
-}
 
 #icons {
   // position: fixed;
@@ -53,6 +49,10 @@ h3 {
       margin-bottom: 10px;
       margin-top: 15px;
       text-decoration: none;
+    }
+    .icon-spacing {
+      //margin-left: 22px;
+      margin-right: 22px;
     }
 
     svg.not-fa {
