@@ -22,7 +22,7 @@
   "homepage": "https://benc.io",
   "main": "index.html",
   "repository": "https://github.com/bencooper222/benc.io.git",
-  "license": "None",
+  "license": "UNLICENSED",
   "scripts": {
     "dev": "echo 'Defaulting to cache enabled' && export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
     "dev:cache": "export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
