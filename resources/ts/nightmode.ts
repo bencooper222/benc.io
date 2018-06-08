@@ -63,7 +63,7 @@ const getSunriseSunsetTimes = (): Promise<{
   begin: DateTime;
   end: DateTime;
 }> => {
-  return fetch('https://freegeoip.net/json/')
+  return fetch('https://freegeoip.app/json/')
     .then((location) => {
       return location.json();
     })
