@@ -38,8 +38,6 @@
   },
   "dependencies": {
     "@lvchengbin/sequence": "^1.1.0",
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
     "bitly": "^5.0.12",
     "luxon": "^1.2.0",
     "node-sass": "^4.7.2",
