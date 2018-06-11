@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Champion.gg Power Results</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        td,
+        th {
+            padding: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="champs">
+        <tr>
+            <th>Champ Name</th>
+            <th>Win %</th>
+            <th>Play %</th>
+            <th>Power</th>
+        </tr>
+
+    </table>
+
+    <script>
+        const getParameterByName = (name, url) => {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        function roundToDecimal(string, decimals) {
+            return parseFloat(parseFloat(string).toFixed(decimals));
+        }
+
+        const data = JSON.parse(getParameterByName('data'));
+        const table = document.getElementById('champs');
+
+        for (let champ of data) {
+            const row = table.insertRow(-1);
+            row.insertCell(-1).innerHTML = champ.name;
+            row.insertCell(-1).innerHTML = roundToDecimal(champ.winPercent * 100, 2) + '%';
+            row.insertCell(-1).innerHTML = roundToDecimal(champ.playPercent * 100, 2) + '%';
+            row.insertCell(-1).innerHTML = roundToDecimal(champ.power, 2);
+        }
+    </script>
+</body>
+
+</html>
