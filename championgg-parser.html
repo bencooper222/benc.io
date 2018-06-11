@@ -58,8 +58,8 @@
         for (let champ of data) {
             const row = table.insertRow(-1);
             row.insertCell(-1).innerHTML = champ.name;
-            row.insertCell(-1).innerHTML = roundToDecimal(champ.winPercent * 100, 2) + '%';
-            row.insertCell(-1).innerHTML = roundToDecimal(champ.playPercent * 100, 2) + '%';
+            row.insertCell(-1).innerHTML = roundToDecimal(champ.winPercent, 2) + '%';
+            row.insertCell(-1).innerHTML = roundToDecimal(champ.playPercent, 2) + '%';
             row.insertCell(-1).innerHTML = roundToDecimal(champ.power, 2);
         }
     </script>
