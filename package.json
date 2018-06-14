@@ -27,7 +27,7 @@
     "dev": "echo 'Defaulting to cache enabled' && export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
     "dev:cache": "export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
     "dev:nocache": "export ENABLE_CACHE=false && cp resources/articles.json resources/articles.use.json && parcel index.html",
-    "prod": "node bundle.js && parcel build championgg-parser.html -d build && cp report.html text-files/keybase.txt text-files/security.txt build",
+    "prod": " parcel build championgg-parser.html -d build && node bundle.js && cp report.html text-files/keybase.txt text-files/security.txt build",
     "tslint": "tslint -c tslint.json 'resources/ts/**/*.ts' --fix",
     "tslint:nofix": "tslint -p ./tslint.json",
     "eslint": "eslint bundle.js resources/js --ext .js, --fix",
@@ -41,7 +41,7 @@
     "bitly": "^5.0.12",
     "luxon": "^1.2.0",
     "node-sass": "^4.7.2",
-    "parcel-bundler": "^1.7.0",
+    "parcel-bundler": "^1.9.0",
     "parcel-plugin-bundle-visualiser": "^1.1.2",
     "suncalc": "^1.8.0",
     "typescript": "^2.8.3"
