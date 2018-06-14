@@ -18,7 +18,8 @@ const parcelOptions = {
   outDir: './build',
   publicUrl: './',
   watch: false,
-  minify: true
+  minify: true,
+ scopeHoist: true,
 };
 
 const minifyArticles = async () => {
