@@ -19,7 +19,7 @@ const parcelOptions = {
   publicUrl: './',
   watch: false,
   minify: true,
- scopeHoist: true,
+  scopeHoist: true
 };
 
 const minifyArticles = async () => {
