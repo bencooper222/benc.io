@@ -2,7 +2,6 @@
   "name": "benc.io",
   "version": "1.0.0",
   "description": "Personal website of Ben Cooper",
-    "Ben Cooper",
   "keywords": ["Personal Website", "Ben Cooper", "benc.io", "Netlify"],
   "engines": {
     "node": ">=8",

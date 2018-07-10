@@ -1,26 +1,15 @@
 /* eslint-env node */
 const Parcel = require('parcel-bundler');
-const path = require('path');
 const BitlyClient = require('bitly');
+const Sequence = require('@lvchengbin/sequence');
+
+const path = require('path');
 const fs = require('fs');
 const util = require('util');
 
 const fs_writeFile = util.promisify(fs.writeFile); // eslint-disable-line camelcase
-const Sequence = require('@lvchengbin/sequence');
 
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config(); // eslint-disable-line import/no-extraneous-dependencies, global-require
-}
-
-const website = path.join(__dirname, './index.html');
-
-const parcelOptions = {
-  outDir: './build',
-  publicUrl: './',
-  watch: false,
-  minify: true,
-  scopeHoist: false
-};
+if (process.env.NODE_ENV !== 'production') require('dotenv').config(); // eslint-disable-line import/no-extraneous-dependencies, global-require
 
 (async () => {
   const bitly = BitlyClient(process.env.BITLY_API_KEY);
@@ -75,7 +64,13 @@ const parcelOptions = {
       JSON.stringify(minArticles),
       'utf8'
     ).then(() => {
-      const bundler = new Parcel(website, parcelOptions);
+      const bundler = new Parcel(path.join(__dirname, './index.html'), {
+        outDir: './build',
+        publicUrl: './',
+        watch: false,
+        minify: true,
+        scopeHoist: false
+      });
       bundler.bundle();
     })
   );
