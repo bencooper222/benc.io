@@ -1,11 +1,10 @@
-/* eslint-env node */
-const Parcel = require('parcel-bundler');
-const BitlyClient = require('bitly');
-const Sequence = require('@lvchengbin/sequence');
+import {Parcel} from 'parcel-bundler';
+import {BitlyClient} from 'bitly';
+import {Sequence} from '@lvchengbin/sequence';
+import * as path from 'path';
+import * as fs from 'fs';
+import * as util from 'util';
 
-const path = require('path');
-const fs = require('fs');
-const util = require('util');
 
 const fs_writeFile = util.promisify(fs.writeFile); // eslint-disable-line camelcase
 
@@ -46,15 +45,14 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config(); // eslint
   });
 
   oldArticles.forEach(article => {
-    const articleMinifier = async () => {
+    sequence.append(async () => {
       try {
         return await bitly.shorten(article);
       } catch (e) {
         console.log(e);
         return article;
       }
-    };
-    sequence.append(articleMinifier);
+    });
   });
 
   // this runs after every link has beeen retrieved from bit.ly
@@ -75,3 +73,4 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config(); // eslint
     })
   );
 })();
+

@@ -1,11 +1,9 @@
 {
-    "include": [
-        "resources/ts/*" // only including this here because tslint needs it.
-    ],
-    "target": "es5",
-    "lib": [
-        "es2017",
-        "dom"
-      ],
-      "strict": true
+    "compilerOptions": {
+       "lib":[
+           "ES2015"
+       ],
+       "strict": true
+    },
+  
 }
