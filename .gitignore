@@ -72,8 +72,5 @@ dist/
 # list of articles actually used - should be created at transpile-time
 resources/articles.use.json
 
-# messing with GitHub stats and doesn't actually have to be in VCS
+#messing with GitHub stats and doesn't actually have to be in VCS
 report.html
-
-# pls stop Macs
-.DS_Store
