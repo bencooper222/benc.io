@@ -26,7 +26,7 @@
     "dev:nocache":
       "export ENABLE_CACHE=false && cp resources/articles.json resources/articles.use.json && parcel index.html",
     "prod":
-      " parcel build championgg-parser.html -d build && node bundle.js && cp report.html text-files/keybase.txt text-files/security.txt build",
+      "node bundle.js && cp report.html text-files/keybase.txt text-files/security.txt build",
     "tslint": "tslint -c tslint.json 'resources/ts/**/*.ts' --fix",
     "tslint:nofix": "tslint -p ./tslint.json",
     "eslint": "eslint bundle.js resources/js --ext .js, --fix",

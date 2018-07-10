@@ -22,7 +22,7 @@ const parcelOptions = {
   scopeHoist: false
 };
 
-const minifyArticles = async () => {
+(async () => {
   const bitly = BitlyClient(process.env.BITLY_API_KEY);
   const oldArticles = JSON.parse(
     fs.readFileSync('resources/articles.json', 'utf8')
@@ -79,6 +79,4 @@ const minifyArticles = async () => {
       bundler.bundle();
     })
   );
-};
-
-minifyArticles();
+})();
