@@ -2,7 +2,12 @@
   "name": "benc.io",
   "version": "1.0.0",
   "description": "Personal website of Ben Cooper",
-  "keywords": ["Personal Website", "Ben Cooper", "benc.io", "Netlify"],
+  "keywords": [
+    "Personal Website",
+    "Ben Cooper",
+    "benc.io",
+    "Netlify"
+  ],
   "engines": {
     "node": ">=8",
     "yarn": ">= 1.5.0"
@@ -19,21 +24,18 @@
   "repository": "https://github.com/bencooper222/benc.io.git",
   "license": "UNLICENSED",
   "scripts": {
-    "dev":
-      "echo 'Defaulting to cache enabled' && export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
-    "dev:cache":
-      "export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
-    "dev:nocache":
-      "export ENABLE_CACHE=false && cp resources/articles.json resources/articles.use.json && parcel index.html",
-    "prod":
-      "node bundle.js && cp report.html text-files/keybase.txt text-files/security.txt build",
+    "dev": "echo 'Defaulting to cache enabled' && export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
+    "dev:cache": "export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
+    "dev:nocache": "export ENABLE_CACHE=false && cp resources/articles.json resources/articles.use.json && parcel index.html",
+    "prod": "node bundle.js && cp report.html text-files/keybase.txt text-files/security.txt build",
     "tslint": "tslint -c tslint.json 'resources/ts/**/*.ts' --fix",
     "tslint:nofix": "tslint -p ./tslint.json",
-    "eslint": "eslint bundle.js resources/js --ext .js, --fix",
-    "eslint:nofix": "eslint bundle.js resources/js/ --ext .js",
+    "jslint": "prettier bundle.js resources/js --write",
+    "jslint:nofix": "prettier bundle.js resources/js",
     "sasslint": "prettier resources/css/home.scss --write",
     "sasslint:nofix": "prettier resources/css/home.scss",
-    "lint:fix": "yarn eslint && yarn tslint && yarn sasslint"
+    "prettier" : "prettier resources/css/home.scss bundle.js resources/js --write",
+    "lint:fix": "yarn tslint && yarn prettier"
   },
   "dependencies": {
     "@lvchengbin/sequence": "^1.1.0",
@@ -48,12 +50,6 @@
   "devDependencies": {
     "@types/luxon": "^0.5.2",
     "dotenv": "^5.0.1",
-    "eslint": "^4.9.0",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-html": "^4.0.2",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-prettier": "^2.6.0",
     "prettier": "1.13.5",
     "tslint": "^5.9.1",
     "tslint-config-airbnb": "^5.8.0",

@@ -1,4 +1,3 @@
-/* eslint-env node */
 const Parcel = require('parcel-bundler');
 const BitlyClient = require('bitly');
 const Sequence = require('@lvchengbin/sequence');
@@ -7,9 +6,9 @@ const path = require('path');
 const fs = require('fs');
 const util = require('util');
 
-const fs_writeFile = util.promisify(fs.writeFile); // eslint-disable-line camelcase
+const fs_writeFile = util.promisify(fs.writeFile);
 
-if (process.env.NODE_ENV !== 'production') require('dotenv').config(); // eslint-disable-line import/no-extraneous-dependencies, global-require
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
 (async () => {
   const bitly = BitlyClient(process.env.BITLY_API_KEY);
