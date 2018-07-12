@@ -27,7 +27,7 @@
     "dev": "echo 'Defaulting to cache enabled' && export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
     "dev:cache": "export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
     "dev:nocache": "export ENABLE_CACHE=false && cp resources/articles.json resources/articles.use.json && parcel index.html",
-    "prod": "node bundle.js && cp report.html text-files/keybase.txt text-files/security.txt build",
+    "prod": "node bundle.js && cp report.html build",
     "tslint": "tslint -c tslint.json 'resources/ts/**/*.ts' --fix",
     "tslint:nofix": "tslint -p ./tslint.json",
     "jslint": "prettier bundle.js resources/js --write",
@@ -43,6 +43,7 @@
     "node-sass": "^4.7.2",
     "parcel-bundler": "^1.9.0",
     "parcel-plugin-bundle-visualiser": "^1.1.2",
+    "parcel-plugin-static-files-copy": "^1.1.0",
     "suncalc": "^1.8.0",
     "typescript": "^2.8.3"
   },
@@ -59,5 +60,6 @@
   "sasslintConfig": ".sass-lint.yml",
   "prettier": {
     "singleQuote": true
-  }
+  },
+  "staticPath": "static"
 }
