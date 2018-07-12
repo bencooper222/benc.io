@@ -19,30 +19,6 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@lvchengbin/event-emitter@0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@lvchengbin/event-emitter/-/event-emitter-0.1.2.tgz#3a613815add175851ebd188862c3bbe6f7b8870d"
-  dependencies:
-    "@lvchengbin/is" "0.0.9"
-
-"@lvchengbin/is@0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@lvchengbin/is/-/is-0.0.9.tgz#d11898002a02efd79bea2fb09e4236357789ebab"
-
-"@lvchengbin/promise@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@lvchengbin/promise/-/promise-1.1.4.tgz#5beeb65394071297f098352cea51a441b29be7d3"
-  dependencies:
-    "@lvchengbin/is" "0.0.9"
-
-"@lvchengbin/sequence@^1.1.0":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@lvchengbin/sequence/-/sequence-1.1.4.tgz#271b3357e832d4ba57c20d7888a3aa932473f57b"
-  dependencies:
-    "@lvchengbin/event-emitter" "0.1.2"
-    "@lvchengbin/is" "0.0.9"
-    "@lvchengbin/promise" "^1.1.4"
-
 "@types/luxon@^0.5.2":
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-0.5.2.tgz#3a12e672cfde45a83fc92b8b11ba91db0622e6fc"

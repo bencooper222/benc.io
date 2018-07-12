@@ -34,11 +34,10 @@
     "jslint:nofix": "prettier bundle.js resources/js",
     "sasslint": "prettier resources/css/home.scss --write",
     "sasslint:nofix": "prettier resources/css/home.scss",
-    "prettier" : "prettier resources/css/home.scss bundle.js resources/js --write",
+    "prettier": "prettier resources/css/home.scss bundle.js resources/js --write",
     "lint:fix": "yarn tslint && yarn prettier"
   },
   "dependencies": {
-    "@lvchengbin/sequence": "^1.1.0",
     "bitly": "^5.0.12",
     "luxon": "^1.2.0",
     "node-sass": "^4.7.2",
