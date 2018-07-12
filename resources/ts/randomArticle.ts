@@ -3,7 +3,7 @@ declare module '*.json' {
   export default value;
 }
 
-import * as articleLinks from '../articles.use.json';
+import articleLinks from '../articles.use.json';
 
 let articleLinksTemp: string[] = articleLinks.slice();
 const link: HTMLLinkElement = document.getElementById(
