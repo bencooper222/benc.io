@@ -1,6 +1,10 @@
 {
   "defaultSeverity": "warning",
-  "extends": ["tslint:recommended", "tslint-plugin-prettier"],
+  "extends": [
+    "tslint:recommended",
+    "tslint-plugin-prettier",
+    "tslint-config-prettier"
+  ],
   "jsRules": {},
   "rules": {
     "no-console": false,
