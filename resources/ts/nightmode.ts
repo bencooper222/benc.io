@@ -1,7 +1,7 @@
 declare const process: any;
 
 import { DateTime } from 'luxon';
-import SunCalc from 'suncalc';
+import * as SunCalc from 'suncalc';
 
 // declares what the cache will look like
 interface ICache {
@@ -17,7 +17,7 @@ const ENABLE_CACHE =
     ? true
     : process.env.ENABLE_CACHE === 'true';
 
-function colorToChangeElements(): Element[] {
+const colorToChangeElements = (): Element[] => {
   return [
     Array.from(document.getElementsByTagName('i')),
     Array.from(document.getElementsByTagName('h2')),
@@ -27,7 +27,7 @@ function colorToChangeElements(): Element[] {
     acc.push(...arr);
     return acc;
   }, []);
-}
+};
 
 const makeDefinedPeriod = (period: string) => {
   const isNight = period === 'night' ? true : false;
@@ -148,7 +148,7 @@ const setLocalStorage = (
   try {
     // checks constant to see if it should cache
     cache = ENABLE_CACHE
-      ? JSON.parse(localStorage.getItem('state'))
+      ? JSON.parse(localStorage.getItem('state') || '{}')
       : undefined;
   } catch (err) {
     console.log('Cache parsing failed, manual calculations');
@@ -175,11 +175,8 @@ const setLocalStorage = (
     return;
   }
 
-  let cacheUntilEnd: DateTime;
-  // tslint:disable-next-line:triple-equals
-  if (cache != undefined) {
-    cacheUntilEnd = DateTime.fromISO(cache.until);
-  } // parse ISO strings
+  const cacheUntilEnd = DateTime.fromISO(cache.until);
+
   if (now < cacheUntilEnd) {
     console.log('Cache indicated state should not change.');
     stateSwitcher(cache.state);
