@@ -17,18 +17,6 @@ const ENABLE_CACHE =
     ? true
     : process.env.ENABLE_CACHE === 'true';
 
-function addArrays(arrays: HTMLElement[][]): HTMLElement[] {
-  // arrays is an array of arrays
-  const rtn = [];
-  for (const elementType of arrays) {
-    for (const element of elementType) {
-      rtn.push(element);
-    }
-  }
-
-  return rtn;
-}
-
 function colorToChangeElements(): HTMLElement[] {
   const icons = Array.prototype.slice.call(
     document.getElementsByTagName('i'),
@@ -39,14 +27,26 @@ function colorToChangeElements(): HTMLElement[] {
     0
   );
 
-  const h2 = Array.prototype.slice.call(document.getElementsByTagName('h2'), 0);
-  const h3 = Array.prototype.slice.call(document.getElementsByTagName('h3'), 0);
+  const h2s = Array.prototype.slice.call(
+    document.getElementsByTagName('h2'),
+    0
+  );
+  const h3s = Array.prototype.slice.call(
+    document.getElementsByTagName('h3'),
+    0
+  );
 
-  return addArrays([icons, h2, h3, svgs]);
+  return [icons, h2s, h3s, svgs].reduce((acc, arr) => {
+    acc.push(...arr);
+    return acc;
+  }, []);
 }
 
 const makeDefinedPeriod = (period: string) => {
   const isNight = period === 'night' ? true : false;
+
+  const changeBackground = document.getElementsByTagName('body');
+  const changeColor = colorToChangeElements();
 
   for (const backgroundElement of Array.prototype.slice.call(
     changeBackground
@@ -114,7 +114,52 @@ const calculateCorrectState = () => {
   });
 };
 
-const setState = () => {
+const stateSwicher = (state: string) => {
+  switch (state) {
+    case 'day':
+      makeDefinedPeriod('day');
+      break;
+    case 'night':
+      makeDefinedPeriod('night');
+      break;
+    default:
+      // recalculate included
+      calculateCorrectState();
+      break;
+  }
+};
+
+const setLocalStorage = (
+  state: string,
+  startDayTime: DateTime,
+  endDayTime: DateTime
+) => {
+  if (!ENABLE_CACHE) {
+    return;
+  } // env variable
+  const toStore: ICache = {} as ICache;
+  const now = DateTime.local();
+  toStore.tz = startDayTime.zoneName;
+  if (state === 'day') {
+    toStore.state = 'day';
+    toStore.until = endDayTime.toISO();
+    toStore.then = 'night';
+  } else if (state === 'night') {
+    if (now < endDayTime) {
+      toStore.state = 'night';
+      toStore.until = startDayTime.toISO();
+      toStore.then = 'day';
+    } else {
+      toStore.state = 'night';
+      toStore.until = now.endOf('day').toISO();
+      toStore.then = 'recalculate';
+    }
+  }
+
+  localStorage.setItem('state', JSON.stringify(toStore));
+};
+
+(() => {
   let cache: ICache;
 
   const now: DateTime = DateTime.local(); // used later in code
@@ -163,54 +208,4 @@ const setState = () => {
     stateSwicher(cache.then);
     calculateCorrectState();
   }
-};
-
-const stateSwicher = (state: string) => {
-  switch (state) {
-    case 'day':
-      makeDefinedPeriod('day');
-      break;
-    case 'night':
-      makeDefinedPeriod('night');
-      break;
-    default:
-      // recalculate included
-      calculateCorrectState();
-      break;
-  }
-};
-
-const setLocalStorage = (
-  state: string,
-  startDayTime: DateTime,
-  endDayTime: DateTime
-) => {
-  if (!ENABLE_CACHE) {
-    return;
-  } // env variable
-  const toStore: ICache = {} as ICache;
-  const now = DateTime.local();
-  toStore.tz = startDayTime.zoneName;
-  if (state === 'day') {
-    toStore.state = 'day';
-    toStore.until = endDayTime.toISO();
-    toStore.then = 'night';
-  } else if (state === 'night') {
-    if (now < endDayTime) {
-      toStore.state = 'night';
-      toStore.until = startDayTime.toISO();
-      toStore.then = 'day';
-    } else {
-      toStore.state = 'night';
-      toStore.until = now.endOf('day').toISO();
-      toStore.then = 'recalculate';
-    }
-  }
-
-  localStorage.setItem('state', JSON.stringify(toStore));
-};
-
-const changeBackground = document.getElementsByTagName('body');
-const changeColor = colorToChangeElements();
-
-setState();
+})();
