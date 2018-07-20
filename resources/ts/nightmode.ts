@@ -17,26 +17,13 @@ const ENABLE_CACHE =
     ? true
     : process.env.ENABLE_CACHE === 'true';
 
-function colorToChangeElements(): HTMLElement[] {
-  const icons = Array.prototype.slice.call(
-    document.getElementsByTagName('i'),
-    0
-  );
-  const svgs = Array.prototype.slice.call(
-    document.getElementsByClassName('not-fa'),
-    0
-  );
-
-  const h2s = Array.prototype.slice.call(
-    document.getElementsByTagName('h2'),
-    0
-  );
-  const h3s = Array.prototype.slice.call(
-    document.getElementsByTagName('h3'),
-    0
-  );
-
-  return [icons, h2s, h3s, svgs].reduce((acc, arr) => {
+function colorToChangeElements(): Element[] {
+  return [
+    Array.from(document.getElementsByTagName('i')),
+    Array.from(document.getElementsByTagName('h2')),
+    Array.from(document.getElementsByTagName('h3')),
+    Array.from(document.getElementsByClassName('not-fa'))
+  ].reduce((acc, arr) => {
     acc.push(...arr);
     return acc;
   }, []);
@@ -78,15 +65,10 @@ const getSunriseSunsetTimes = (): Promise<{
     })
     .then(data => {
       // const format = '';
-      const civilBegin: DateTime = DateTime.fromISO(data.start.toISOString());
-      const civilEnd: DateTime = DateTime.fromISO(data.stop.toISOString());
-
-      const civilTimes = {
-        begin: civilBegin,
-        end: civilEnd
+      return {
+        begin: DateTime.fromISO(data.start.toISOString()),
+        end: DateTime.fromISO(data.stop.toISOString())
       };
-
-      return civilTimes;
     });
 };
 
@@ -99,7 +81,7 @@ const calculateCorrectState = () => {
           DateTime.DATETIME_FULL
         )} and ${data.end.toLocaleString(DateTime.DATETIME_FULL)}`
       );
-      stateSwicher('day');
+      stateSwitcher('day');
       setLocalStorage('day', data.begin, data.end);
     } else {
       console.log(
@@ -108,13 +90,13 @@ const calculateCorrectState = () => {
         )} or after ${data.end.toLocaleString(DateTime.DATETIME_FULL)}`
       );
 
-      stateSwicher('night');
+      stateSwitcher('night');
       setLocalStorage('night', data.begin, data.end);
     }
   });
 };
 
-const stateSwicher = (state: string) => {
+const stateSwitcher = (state: string) => {
   switch (state) {
     case 'day':
       makeDefinedPeriod('day');
@@ -200,12 +182,12 @@ const setLocalStorage = (
   } // parse ISO strings
   if (now < cacheUntilEnd) {
     console.log('Cache indicated state should not change.');
-    stateSwicher(cache.state);
+    stateSwitcher(cache.state);
   } else {
     console.log(
       'Cache indicated state should change. Using designated new state and recalculating cache'
     );
-    stateSwicher(cache.then);
+    stateSwitcher(cache.then);
     calculateCorrectState();
   }
 })();
