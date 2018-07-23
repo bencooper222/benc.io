@@ -7,5 +7,6 @@
   "eslint.packageManager": "yarn",
   "files.associations": {
     "*.json": "jsonc"
-  }
+  },
+  "npm.enableScriptExplorer": true
 }
