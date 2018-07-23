@@ -17,7 +17,7 @@ const ENABLE_CACHE =
     ? true
     : process.env.ENABLE_CACHE === 'true';
 
-const colorToChangeElements = (): Element[] => {
+const colorToChangeElements = (): HTMLElement[] => {
   return [
     Array.from(document.getElementsByTagName('i')),
     Array.from(document.getElementsByTagName('h2')),
@@ -26,24 +26,22 @@ const colorToChangeElements = (): Element[] => {
   ].reduce((acc, arr) => {
     acc.push(...arr);
     return acc;
-  }, []);
+  }, []) as HTMLElement[];
 };
 
 const makeDefinedPeriod = (period: string) => {
   const isNight = period === 'night' ? true : false;
 
-  const changeBackground = document.getElementsByTagName('body');
-  const changeColor = colorToChangeElements();
+  const changeBackground = Array.from(document.getElementsByTagName('body'));
+  const changeColor = Array.from(colorToChangeElements());
 
-  for (const backgroundElement of Array.prototype.slice.call(
-    changeBackground
-  )) {
-    backgroundElement.style.backgroundColor = isNight ? 'black' : 'white';
-  }
+  changeBackground.forEach(backgroundEl => {
+    backgroundEl.style.backgroundColor = isNight ? 'black' : 'white';
+  });
 
-  for (const textElement of Array.prototype.slice.call(changeColor)) {
-    textElement.style.color = isNight ? 'white' : 'black';
-  }
+  changeColor.forEach(colorEl => {
+    colorEl.style.color = isNight ? 'white' : 'black';
+  });
 };
 
 const getSunriseSunsetTimes = (): Promise<{
