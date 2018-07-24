@@ -60,7 +60,8 @@
   "postinstall": "npm rebuild node-sass",
   "sasslintConfig": ".sass-lint.yml",
   "prettier": {
-    "singleQuote": true
+    "singleQuote": true,
+    "trailingComma": "all"
   },
   "staticPath": "static"
 }

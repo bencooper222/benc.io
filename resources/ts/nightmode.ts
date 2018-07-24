@@ -22,7 +22,7 @@ const colorToChangeElements = (): HTMLElement[] => {
     Array.from(document.getElementsByTagName('i')),
     Array.from(document.getElementsByTagName('h2')),
     Array.from(document.getElementsByTagName('h3')),
-    Array.from(document.getElementsByClassName('not-fa'))
+    Array.from(document.getElementsByClassName('not-fa')),
   ].reduce((acc, arr) => {
     acc.push(...arr);
     return acc;
@@ -56,7 +56,7 @@ const getSunriseSunsetTimes = (): Promise<{
       const sunTimes = SunCalc.getTimes(
         new Date(),
         coords.latitude,
-        coords.longitude
+        coords.longitude,
       );
 
       return { start: sunTimes.dawn, stop: sunTimes.sunset };
@@ -65,7 +65,7 @@ const getSunriseSunsetTimes = (): Promise<{
       // const format = '';
       return {
         begin: DateTime.fromISO(data.start.toISOString()),
-        end: DateTime.fromISO(data.stop.toISOString())
+        end: DateTime.fromISO(data.stop.toISOString()),
       };
     });
 };
@@ -76,16 +76,16 @@ const calculateCorrectState = () => {
     if (now > data.begin && now < data.end) {
       console.log(
         `It is between: ${data.begin.toLocaleString(
-          DateTime.DATETIME_FULL
-        )} and ${data.end.toLocaleString(DateTime.DATETIME_FULL)}`
+          DateTime.DATETIME_FULL,
+        )} and ${data.end.toLocaleString(DateTime.DATETIME_FULL)}`,
       );
       stateSwitcher('day');
       setLocalStorage('day', data.begin, data.end);
     } else {
       console.log(
         `It is either before ${data.begin.toLocaleString(
-          DateTime.DATETIME_FULL
-        )} or after ${data.end.toLocaleString(DateTime.DATETIME_FULL)}`
+          DateTime.DATETIME_FULL,
+        )} or after ${data.end.toLocaleString(DateTime.DATETIME_FULL)}`,
       );
 
       stateSwitcher('night');
@@ -112,7 +112,7 @@ const stateSwitcher = (state: string) => {
 const setLocalStorage = (
   state: string,
   startDayTime: DateTime,
-  endDayTime: DateTime
+  endDayTime: DateTime,
 ) => {
   if (!ENABLE_CACHE) {
     return;
@@ -180,7 +180,7 @@ const setLocalStorage = (
     stateSwitcher(cache.state);
   } else {
     console.log(
-      'Cache indicated state should change. Using designated new state and recalculating cache'
+      'Cache indicated state should change. Using designated new state and recalculating cache',
     );
     stateSwitcher(cache.then);
     calculateCorrectState();
