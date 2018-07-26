@@ -50,6 +50,7 @@
   },
   "devDependencies": {
     "@types/luxon": "^0.5.2",
+    "@types/suncalc": "^1.8.0",
     "dotenv": "^5.0.1",
     "prettier": "1.13.5",
     "tslint": "^5.9.1",
