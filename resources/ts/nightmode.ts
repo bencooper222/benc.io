@@ -113,7 +113,7 @@ const setLocalStorage = (
   startDayTime: DateTime,
   endDayTime: DateTime,
 ) => {
-  if (!ENABLE_CACHE) {
+  if (!ENABLE_CACHE || process.env.FORCED_STATE) {
     return;
   } // env variable
   const toStore: ICache = {} as ICache;
