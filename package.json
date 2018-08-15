@@ -27,6 +27,8 @@
     "dev": "echo 'Defaulting to cache enabled' && export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
     "dev:cache": "export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
     "dev:nocache": "export ENABLE_CACHE=false && cp resources/articles.json resources/articles.use.json && parcel index.html",
+    "dev:day": "export FORCED_STATE=day && cp resources/articles.json resources/articles.use.json && parcel index.html",
+    "dev:night": "export FORCED_STATE='night' && cp resources/articles.json resources/articles.use.json && parcel index.html",
     "prod": "node bundle.js && cp report.html build",
     "tslint": "tslint -c tslint.json 'resources/ts/**/*.ts' --fix",
     "tslint:nofix": "tslint -p ./tslint.json",

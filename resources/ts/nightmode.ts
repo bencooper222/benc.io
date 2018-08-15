@@ -17,8 +17,8 @@ const ENABLE_CACHE =
     ? true
     : process.env.ENABLE_CACHE === 'true';
 
-const colorToChangeElements = (): HTMLElement[] => {
-  return [
+const colorToChangeElements = (): HTMLElement[] =>
+  [
     Array.from(document.getElementsByTagName('i')),
     Array.from(document.getElementsByTagName('h2')),
     Array.from(document.getElementsByTagName('h3')),
@@ -27,7 +27,6 @@ const colorToChangeElements = (): HTMLElement[] => {
     acc.push(...arr);
     return acc;
   }, []) as HTMLElement[];
-};
 
 const makeDefinedPeriod = (period: string) => {
   const isNight = period === 'night' ? true : false;
@@ -141,6 +140,17 @@ const setLocalStorage = (
 
 (() => {
   let cache: ICache;
+
+  if (process.env.FORCED_STATE) {
+    if (process.env.FORCED_STATE === 'night') {
+      stateSwitcher('night');
+    } else {
+      stateSwitcher('day');
+    }
+    console.log(`State was forced to ${process.env.FORCED_STATE}`);
+
+    return;
+  }
 
   const now: DateTime = DateTime.local(); // used later in code
   try {
