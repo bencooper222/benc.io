@@ -19,7 +19,7 @@ const ENABLE_CACHE =
 
 const colorToChangeElements = (): HTMLElement[] =>
   [
-    Array.from(document.getElementsByTagName('i')),
+    Array.from(document.getElementsByTagName('path')),
     Array.from(document.getElementsByTagName('h2')),
     Array.from(document.getElementsByTagName('h3')),
     Array.from(document.getElementsByClassName('not-fa')),
