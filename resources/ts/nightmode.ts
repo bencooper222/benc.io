@@ -19,7 +19,7 @@ const ENABLE_CACHE =
 
 const colorToChangeElements = (): HTMLElement[] =>
   [
-    Array.from(document.getElementsByTagName('i')),
+    Array.from(document.getElementsByTagName('path')),
     Array.from(document.getElementsByTagName('h2')),
     Array.from(document.getElementsByTagName('h3')),
     Array.from(document.getElementsByClassName('not-fa')),
@@ -48,9 +48,7 @@ const getSunriseSunsetTimes = (): Promise<{
   end: DateTime;
 }> => {
   return fetch('https://freegeoip.app/json/')
-    .then(location => {
-      return location.json();
-    })
+    .then(location => location.json())
     .then(coords => {
       const sunTimes = SunCalc.getTimes(
         new Date(),
@@ -58,13 +56,9 @@ const getSunriseSunsetTimes = (): Promise<{
         coords.longitude,
       );
 
-      return { start: sunTimes.dawn, stop: sunTimes.sunset };
-    })
-    .then(data => {
-      // const format = '';
       return {
-        begin: DateTime.fromISO(data.start.toISOString()),
-        end: DateTime.fromISO(data.stop.toISOString()),
+        begin: DateTime.fromISO(sunTimes.dawn.toISOString()),
+        end: DateTime.fromISO(sunTimes.sunset.toISOString()),
       };
     });
 };
@@ -167,11 +161,11 @@ const setLocalStorage = (
   // loose equality needed
   // tslint:disable-next-line:triple-equals
   if (cache == undefined) {
-    if (ENABLE_CACHE) {
-      console.log('No cache, manual calculations');
-    } else {
-      console.log('ENABLE_CACHE is set to false, manual calculations');
-    }
+    console.log(
+      ENABLE_CACHE
+        ? 'No cache, manual calculations'
+        : 'ENABLE_CACHE is set to false, manual calculations',
+    );
 
     calculateCorrectState();
     return;
@@ -188,11 +182,13 @@ const setLocalStorage = (
   if (now < cacheUntilEnd) {
     console.log('Cache indicated state should not change.');
     stateSwitcher(cache.state);
-  } else {
+  } else if (now.diff(cacheUntilEnd, 'hours').hours > 10) {
     console.log(
       'Cache indicated state should change. Using designated new state and recalculating cache',
     );
     stateSwitcher(cache.then);
+    calculateCorrectState();
+  } else {
     calculateCorrectState();
   }
 })();
