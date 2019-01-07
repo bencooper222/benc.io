@@ -1,3 +1,11 @@
-import { main } from './main.rs';
+import { add } from '../rust/src/randomArticle.rs';
+console.log(add);
+try {
+  console.log(add(2, 3));
+} catch (err) {
+  console.log(err);
+}
 
-main();
+document.getElementById('link').addEventListener('click', () => {
+  console.log(add(2, 3));
+});
