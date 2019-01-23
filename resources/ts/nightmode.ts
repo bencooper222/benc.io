@@ -17,22 +17,16 @@ const ENABLE_CACHE =
     ? true
     : process.env.ENABLE_CACHE === 'true';
 
-const colorToChangeElements = (): HTMLElement[] =>
-  [
-    Array.from(document.getElementsByTagName('path')),
-    Array.from(document.getElementsByTagName('h2')),
-    Array.from(document.getElementsByTagName('h3')),
-    Array.from(document.getElementsByClassName('not-fa')),
-  ].reduce((acc, arr) => {
-    acc.push(...arr);
-    return acc;
-  }, []) as HTMLElement[];
-
 const makeDefinedPeriod = (period: string) => {
   const isNight = period === 'night' ? true : false;
 
   const changeBackground = Array.from(document.getElementsByTagName('body'));
-  const changeColor = Array.from(colorToChangeElements());
+  const changeColor = [
+    ...Array.from(document.getElementsByTagName('i')),
+    ...Array.from(document.getElementsByTagName('h2')),
+    ...Array.from(document.getElementsByTagName('h3')),
+    // ...Array.from(document.getElementsByClassName('not-fa')),
+  ];
 
   changeBackground.forEach(backgroundEl => {
     backgroundEl.style.backgroundColor = isNight ? 'black' : 'white';
