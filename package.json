@@ -57,7 +57,7 @@
     "dotenv": "^5.0.1",
     "prettier": "1.13.5",
     "tslint": "^5.9.1",
-    "tslint-config-prettier": "^1.13.0",
+    "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^1.3.0"
   },
   "postinstall": "npm rebuild node-sass",
