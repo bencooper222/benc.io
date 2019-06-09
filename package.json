@@ -2,12 +2,7 @@
   "name": "benc.io",
   "version": "1.0.0",
   "description": "Personal website of Ben Cooper",
-  "keywords": [
-    "Personal Website",
-    "Ben Cooper",
-    "benc.io",
-    "Netlify"
-  ],
+  "keywords": ["Personal Website", "Ben Cooper", "benc.io", "Netlify"],
   "engines": {
     "node": ">=8",
     "yarn": ">= 1.5.0"
@@ -24,40 +19,47 @@
   "repository": "https://github.com/bencooper222/benc.io.git",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "echo 'Defaulting to cache enabled' && export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
-    "dev:cache": "export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
-    "dev:nocache": "export ENABLE_CACHE=false && cp resources/articles.json resources/articles.use.json && parcel index.html",
-    "dev:day": "export FORCED_STATE=day && cp resources/articles.json resources/articles.use.json && parcel index.html",
-    "dev:night": "export FORCED_STATE='night' && cp resources/articles.json resources/articles.use.json && parcel index.html",
-    "prod": "node bundle.js && cp report.html build",
+    "dev":
+      "echo 'Defaulting to cache enabled' && export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
+    "dev:cache":
+      "export ENABLE_CACHE=true && cp resources/articles.json resources/articles.use.json && parcel index.html",
+    "dev:nocache":
+      "export ENABLE_CACHE=false && cp resources/articles.json resources/articles.use.json && parcel index.html",
+    "dev:day":
+      "export FORCED_STATE=day && cp resources/articles.json resources/articles.use.json && parcel index.html",
+    "dev:night":
+      "export FORCED_STATE='night' && cp resources/articles.json resources/articles.use.json && parcel index.html",
+    "prod": "node bundle.js",
     "tslint": "tslint -c tslint.json 'resources/ts/**/*.ts' --fix",
     "tslint:nofix": "tslint -p ./tslint.json",
     "jslint": "prettier bundle.js resources/js --write",
     "jslint:nofix": "prettier bundle.js resources/js",
     "sasslint": "prettier resources/css/home.scss --write",
     "sasslint:nofix": "prettier resources/css/home.scss",
-    "prettier": "prettier resources/css/home.scss bundle.js resources/js *.md resources/articles.json *.json --write",
-    "prettier:nofix": "prettier resources/css/home.scss bundle.js resources/js *.md resources/articles.json *.json",
+    "prettier":
+      "prettier resources/css/home.scss bundle.js resources/js *.md resources/articles.json *.json --write",
+    "prettier:nofix":
+      "prettier resources/css/home.scss bundle.js resources/js *.md resources/articles.json *.json",
     "lint:fix": "yarn tslint && yarn prettier"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.2.0",
-    "bitly": "^5.0.12",
+    "@fortawesome/fontawesome-free": "^5.9.0",
+    "bitly": "^5.1.7",
     "luxon": "^1.16.0",
     "node-sass": "^4.12.0",
     "parcel-bundler": "^1.12.3",
-    "parcel-plugin-bundle-visualiser": "^1.1.2",
-    "parcel-plugin-static-files-copy": "^1.1.0",
+    "parcel-plugin-bundle-visualiser": "^1.2.0",
+    "parcel-plugin-static-files-copy": "^1.2.4",
     "suncalc": "^1.8.0",
-    "typescript": "^2.8.3"
+    "typescript": "^2.9.2"
   },
   "devDependencies": {
-    "@types/luxon": "^0.5.2",
+    "@types/luxon": "^0.5.3",
     "@types/suncalc": "^1.8.0",
     "dotenv": "^5.0.1",
     "prettier": "1.13.5",
-    "tslint": "^5.9.1",
-    "tslint-config-prettier": "^1.13.0",
+    "tslint": "^5.17.0",
+    "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^1.3.0"
   },
   "postinstall": "npm rebuild node-sass",
