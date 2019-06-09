@@ -37,7 +37,6 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config();
     'utf8',
   ).then(() => {
     const bundler = new Parcel(path.join(__dirname, './index.html'), {
-      outDir: './build',
       publicUrl: './',
       watch: false,
       minify: true,
