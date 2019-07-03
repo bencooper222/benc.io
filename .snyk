@@ -1,0 +1,36 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-450202:
+    - parcel-bundler > babylon-walk > babel-types > lodash:
+        patched: '2019-07-03T23:35:35.404Z'
+    - node-sass > lodash:
+        patched: '2019-07-03T23:35:35.404Z'
+    - parcel-bundler > @babel/types > lodash:
+        patched: '2019-07-03T23:35:35.404Z'
+    - bitly > request-promise > request-promise-core > lodash:
+        patched: '2019-07-03T23:35:35.404Z'
+    - parcel-bundler > @babel/template > @babel/types > lodash:
+        patched: '2019-07-03T23:35:35.404Z'
+    - parcel-bundler > htmlnano > uncss > lodash:
+        patched: '2019-07-03T23:35:35.404Z'
+    - node-sass > gaze > globule > lodash:
+        patched: '2019-07-03T23:35:35.404Z'
+    - node-sass > sass-graph > lodash:
+        patched: '2019-07-03T23:35:35.404Z'
+    - parcel-bundler > @babel/traverse > @babel/helper-function-name > @babel/types > lodash:
+        patched: '2019-07-03T23:35:35.404Z'
+    - parcel-bundler > @babel/plugin-transform-modules-commonjs > @babel/helper-module-transforms > @babel/helper-simple-access > @babel/types > lodash:
+        patched: '2019-07-03T23:35:35.404Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-transform-classes > @babel/helper-replace-supers > @babel/traverse > @babel/generator > lodash:
+        patched: '2019-07-03T23:35:35.404Z'
+    - parcel-bundler > htmlnano > uncss > jsdom > request-promise-native > request-promise-core > lodash:
+        patched: '2019-07-03T23:35:35.404Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-transform-classes > @babel/helper-replace-supers > @babel/traverse > @babel/helper-function-name > @babel/types > lodash:
+        patched: '2019-07-03T23:35:35.404Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-transform-async-to-generator > @babel/helper-remap-async-to-generator > @babel/helper-wrap-function > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash:
+        patched: '2019-07-03T23:35:35.404Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-proposal-async-generator-functions > @babel/helper-remap-async-to-generator > @babel/helper-wrap-function > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash:
+        patched: '2019-07-03T23:35:35.404Z'
