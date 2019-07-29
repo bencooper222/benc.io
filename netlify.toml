@@ -29,6 +29,10 @@
   from="/index.html/*"
   to="/"
   status=301
+  [[redirects]]
+  from="/resume/*"
+  to="https://resume.benc.io"
+  status=301
 
 
 [context.deploy-preview]
