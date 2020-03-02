@@ -49,7 +49,7 @@
     "parcel-plugin-bundle-visualiser": "^1.2.0",
     "parcel-plugin-static-files-copy": "^1.2.4",
     "suncalc": "^1.8.0",
-    "typescript": "^2.9.2"
+    "typescript": "^3.8.3"
   },
   "devDependencies": {
     "@types/luxon": "^0.5.3",
