@@ -13,9 +13,7 @@ interface ICache {
 
 const ENABLE_CACHE =
   // tslint:disable-next-line:triple-equals
-  process.env.ENABLE_CACHE == undefined
-    ? true
-    : process.env.ENABLE_CACHE === 'true';
+  process.env.ENABLE_CACHE == undefined ? true : process.env.ENABLE_CACHE === 'true';
 
 const makeDefinedPeriod = (period: string) => {
   const isNight = period === 'night' ? true : false;
@@ -44,11 +42,7 @@ const getSunriseSunsetTimes = (): Promise<{
   return fetch('https://freegeoip.app/json/')
     .then(location => location.json())
     .then(coords => {
-      const sunTimes = SunCalc.getTimes(
-        new Date(),
-        coords.latitude,
-        coords.longitude,
-      );
+      const sunTimes = SunCalc.getTimes(new Date(), coords.latitude, coords.longitude);
 
       return {
         begin: DateTime.fromISO(sunTimes.dawn.toISOString()),
@@ -96,11 +90,7 @@ const stateSwitcher = (state: string) => {
   }
 };
 
-const setLocalStorage = (
-  state: string,
-  startDayTime: DateTime,
-  endDayTime: DateTime,
-) => {
+const setLocalStorage = (state: string, startDayTime: DateTime, endDayTime: DateTime) => {
   if (!ENABLE_CACHE || process.env.FORCED_STATE) {
     return;
   } // env variable
@@ -143,9 +133,7 @@ const setLocalStorage = (
   const now: DateTime = DateTime.local(); // used later in code
   try {
     // checks constant to see if it should cache
-    cache = ENABLE_CACHE
-      ? JSON.parse(localStorage.getItem('state') || '{}')
-      : undefined;
+    cache = ENABLE_CACHE ? JSON.parse(localStorage.getItem('state') || '{}') : undefined;
   } catch (err) {
     console.log('Cache parsing failed, manual calculations');
     calculateCorrectState();

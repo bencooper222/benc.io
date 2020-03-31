@@ -6,9 +6,7 @@ declare module '*.json' {
 import articleLinks from '../articles.use.json';
 
 let articleLinksTemp: string[] = articleLinks.slice();
-const link: HTMLLinkElement = document.getElementById(
-  'link',
-) as HTMLLinkElement;
+const link: HTMLLinkElement = document.getElementById('link') as HTMLLinkElement;
 link.target = '_blank';
 
 const randomPick = (initialLoad = false) => {
