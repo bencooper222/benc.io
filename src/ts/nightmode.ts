@@ -26,11 +26,11 @@ const makeDefinedPeriod = (period: string) => {
     // ...Array.from(document.getElementsByClassName('not-fa')),
   ];
 
-  changeBackground.forEach(backgroundEl => {
+  changeBackground.forEach((backgroundEl) => {
     backgroundEl.style.backgroundColor = isNight ? 'black' : 'white';
   });
 
-  changeColor.forEach(colorEl => {
+  changeColor.forEach((colorEl) => {
     colorEl.style.color = isNight ? 'white' : 'black';
   });
 };
@@ -40,8 +40,8 @@ const getSunriseSunsetTimes = (): Promise<{
   end: DateTime;
 }> => {
   return fetch('https://freegeoip.app/json/')
-    .then(location => location.json())
-    .then(coords => {
+    .then((location) => location.json())
+    .then((coords) => {
       const sunTimes = SunCalc.getTimes(new Date(), coords.latitude, coords.longitude);
 
       return {
@@ -52,7 +52,7 @@ const getSunriseSunsetTimes = (): Promise<{
 };
 
 const calculateCorrectState = () => {
-  getSunriseSunsetTimes().then(data => {
+  getSunriseSunsetTimes().then((data) => {
     const now: DateTime = DateTime.local();
     if (now > data.begin && now < data.end) {
       console.log(
