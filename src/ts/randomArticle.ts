@@ -1,9 +1,4 @@
-declare module '*.json' {
-  const value: any;
-  export default value;
-}
-
-import articleLinks from '../articles.use.json';
+import articleLinks from '../articles.json';
 
 let articleLinksTemp: string[] = articleLinks.slice();
 const link: HTMLLinkElement = document.getElementById('link') as HTMLLinkElement;
@@ -16,7 +11,7 @@ const randomPick = (initialLoad = false) => {
   }
 
   // process to randomly select article
-  const rand: number = Math.floor(Math.random() * articleLinksTemp.length);
+  const rand = Math.floor(Math.random() * articleLinksTemp.length);
   link.href = articleLinksTemp[rand];
 
   // add listener to change link onclick

@@ -1,10 +1,4 @@
 {
-  "sasslint.enable": false,
-  "eslint.run": "onSave",
-  "tslint.packageManager": "yarn",
-  "tslint.enable": false,
-  "eslint.enable": true,
-  "eslint.packageManager": "yarn",
   "files.associations": {
     "*.json": "jsonc"
   },
