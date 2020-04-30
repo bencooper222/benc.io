@@ -1,0 +1,36 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.14.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - node-sass > lodash:
+        patched: '2020-04-30T23:21:20.176Z'
+    - node-sass > sass-graph > lodash:
+        patched: '2020-04-30T23:21:20.176Z'
+    - parcel-bundler > @babel/core > lodash:
+        patched: '2020-04-30T23:21:20.176Z'
+    - bitly > request-promise > request-promise-core > lodash:
+        patched: '2020-04-30T23:21:20.176Z'
+    - node-sass > gaze > globule > lodash:
+        patched: '2020-04-30T23:21:20.176Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-transform-block-scoping > lodash:
+        patched: '2020-04-30T23:21:20.176Z'
+    - parcel-bundler > babylon-walk > babel-types > lodash:
+        patched: '2020-04-30T23:21:20.176Z'
+    - parcel-bundler > htmlnano > uncss > lodash:
+        patched: '2020-04-30T23:21:20.176Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-transform-classes > @babel/helper-define-map > lodash:
+        patched: '2020-04-30T23:21:20.176Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-transform-async-to-generator > @babel/helper-remap-async-to-generator > @babel/traverse > lodash:
+        patched: '2020-04-30T23:21:20.176Z'
+    - parcel-bundler > htmlnano > uncss > jsdom > request-promise-native > request-promise-core > lodash:
+        patched: '2020-04-30T23:21:20.176Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > lodash:
+        patched: '2020-04-30T23:21:20.176Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-transform-async-to-generator > @babel/helper-remap-async-to-generator > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-04-30T23:21:20.176Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-04-30T23:21:20.176Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-04-30T23:21:20.176Z'
