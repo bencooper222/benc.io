@@ -38,7 +38,9 @@
     "sasslint:nofix": "prettier resources/css/home.scss",
     "prettier": "prettier resources/css/home.scss bundle.js resources/js *.md resources/articles.json *.json --write",
     "prettier:nofix": "prettier resources/css/home.scss bundle.js resources/js *.md resources/articles.json *.json",
-    "lint:fix": "yarn tslint && yarn prettier"
+    "lint:fix": "yarn tslint && yarn prettier",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.10.1",
@@ -49,7 +51,8 @@
     "parcel-plugin-bundle-visualiser": "^1.2.0",
     "parcel-plugin-static-files-copy": "^1.2.4",
     "suncalc": "^1.8.0",
-    "typescript": "^2.9.2"
+    "typescript": "^2.9.2",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@types/luxon": "^0.5.3",
@@ -65,5 +68,6 @@
     "singleQuote": true,
     "trailingComma": "all"
   },
-  "staticPath": "static"
+  "staticPath": "static",
+  "snyk": true
 }
