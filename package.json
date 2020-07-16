@@ -41,7 +41,7 @@
     "lint:fix": "yarn tslint && yarn prettier"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.10.1",
+    "@fortawesome/fontawesome-free": "^5.14.0",
     "bitly": "^5.1.7",
     "luxon": "^1.17.2",
     "node-sass": "^4.12.0",
