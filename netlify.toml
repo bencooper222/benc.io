@@ -13,5 +13,5 @@
   [[redirects]]
   from="/resume/*"
   to="https://resume.benc.io"
-  status=301
+  status=302
 
