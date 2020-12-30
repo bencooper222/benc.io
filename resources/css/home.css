@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+}
+
+h1 {
+  -webkit-margin-after: 0.2em;
+  -webkit-margin-before: 0.2em;
+  color: #639;
+  font-family: 'Roboto Slab', serif;
+  font-size: 4.5em;
+  font-weight: 400;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+h2,
+h3 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+h3 {
+  font-size: 1.2em;
+}
+#headers {
+  margin-top: 15%;
+}
+.shift-right {
+  margin-left: 9%;
+}
+
+#icons {
+  display: inline-block;
+  margin-top: 1%;
+  text-align: left;
+}
+
+icons svg.not-fa {
+  -webkit-font-smoothing: antialiased;
+  background-color: transparent;
+  color: white;
+  display: inline-block;
+
+  fill: currentColor;
+  height: 2.14929577em;
+  text-rendering: auto;
+  width: 2em;
+}
+
+icons svg.not-fa::before {
+  content: '\f003';
+}
+
+#icons .icon-spacing {
+  margin-right: 22px;
+}
+
+#icons a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+#icons a svg {
+  color: white;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  text-decoration: none;
+}
+
+#reach {
+  margin-top: 10px;
+}
+
+#article-prompt {
+  margin-top: 3%;
+}
+
+#article-prompt h3 {
+  margin-top: 0.2em;
+}
+
+#link {
+  color: #639;
+  font-weight: bold;
+}
+#link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+span.strike {
+  text-decoration: line-through;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: white;
+    background-color: black;
+  }
+
+  #icons a {
+    color: white;
+  }
+
+  #icons a svg {
+    color: white;
+  }
+
+  icons svg.not-fa {
+    color: white;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: black;
+    background-color: white;
+  }
+
+  #icons a {
+    color: black;
+  }
+
+  #icons a svg {
+    color: black;
+  }
+
+  icons svg.not-fa {
+    color: black;
+  }
+}

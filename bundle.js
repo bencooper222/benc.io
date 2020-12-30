@@ -18,16 +18,15 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config();
     'resources/articles.use.json',
     JSON.stringify(
       await Promise.all(
-        oldArticles.map(article => {
+        oldArticles.map((article) => {
           return bitly
             .shorten(article)
-            .then(
-              minArticle =>
-                minArticle.data.url.substring(0, 5) === 'https'
-                  ? minArticle.data.url
-                  : `https${minArticle.data.url.substring(4)}`,
+            .then((minArticle) =>
+              minArticle.data.url.substring(0, 5) === 'https'
+                ? minArticle.data.url
+                : `https${minArticle.data.url.substring(4)}`,
             )
-            .catch(err => {
+            .catch((err) => {
               console.error(err);
               return article;
             });
