@@ -3,13 +3,14 @@ const Parcel = require('parcel-bundler');
 const path = require('path');
 const fs = require('fs');
 const util = require('util');
+const BitlyClient = require('bitly').BitlyClient;
+const bitly = new BitlyClient(process.env.BITLY_API_KEY);
 
 const fs_writeFile = util.promisify(fs.writeFile);
 
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
 (async () => {
-  const bitly = require('bitly')(process.env.BITLY_API_KEY);
   const oldArticles = JSON.parse(
     fs.readFileSync('resources/articles.json', 'utf8'),
   );
