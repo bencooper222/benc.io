@@ -11,25 +11,23 @@ const fs_writeFile = util.promisify(fs.writeFile);
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
 (async () => {
-  const oldArticles = JSON.parse(
-    fs.readFileSync('resources/articles.json', 'utf8'),
-  );
+  const oldArticles = JSON.parse(fs.readFileSync('resources/articles.json', 'utf8'));
 
   fs_writeFile(
     'resources/articles.use.json',
     JSON.stringify(
       await Promise.all(
-        oldArticles.map((article) => {
+        oldArticles.map(article => {
           return bitly
             .shorten(article)
-            .then((minArticle) =>
-              minArticle.data.url.substring(0, 5) === 'https'
-                ? minArticle.data.url
-                : `https${minArticle.data.url.substring(4)}`,
-            )
-            .catch((err) => {
+            .then(res => {
+              return res.link.substring(0, 5) === 'https'
+                ? res.link
+                : `https${res.link.substring(4)}`;
+            })
+            .catch(err => {
               console.error(err);
-              return article;
+              process.exit(1);
             });
         }),
       ),

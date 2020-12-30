@@ -40,9 +40,5 @@
     "dotenv": "^5.0.1",
     "prettier": "~2.2.1"
   },
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "all"
-  },
   "staticPath": "static"
 }
