@@ -2,25 +2,6 @@
   publish = "dist/"
   command = "npm run prod"
   # functions = "lambda-build/"
-
-
-[context.production]
-[[redirects]]
-  from="/netlify-location/*"
-  to="https://extreme-ip-lookup.com/json/"
-  status=200
-  [[redirects]]
-  from ="/pub/*"
-  to="https://pub.benc.io"
-  status=301
-  [[redirects]]
-  from ="/geocoder/*"
-  to="https://geocode.benc.io"
-  status=301
-  [[redirects]]
-  from ="/geocode/*"
-  to="https://geocode.benc.io"
-  status=301
   [[redirects]]
   from="/.well-known/security.txt"
   to="https://benc.io/security.txt"
@@ -34,54 +15,3 @@
   to="https://resume.benc.io"
   status=301
 
-
-[context.deploy-preview]
- from="/netlify-location/*"
-  to="https://extreme-ip-lookup.com/json/"
-  status=200
-  [[redirects]]
-  from ="/pub/*"
-  to="https://pub.benc.io"
-  status=301
-  [[redirects]]
-  from ="/geocoder/*"
-  to="https://geocode.benc.io"
-  status=301
-  [[redirects]]
-  from ="/geocode/*"
-  to="https://geocode.benc.io"
-  status=301
-  [[redirects]]
-  from="/.well-known/security.txt"
-  to="https://benc.io/security.txt"
-  status=301
-  [[redirects]]
-  from="/index.html/*"
-  to="/"
-  status=301
-
-
-[context.branch-deploy]
- from="/netlify-location/*"
-  to="https://extreme-ip-lookup.com/json/"
-  status=200
-  [[redirects]]
-  from ="/pub/*"
-  to="https://pub.benc.io"
-  status=301
-  [[redirects]]
-  from ="/geocoder/*"
-  to="https://geocode.benc.io"
-  status=301
-  [[redirects]]
-  from ="/geocode/*"
-  to="https://geocode.benc.io"
-  status=301
-  [[redirects]]
-  from="/.well-known/security.txt"
-  to="https://benc.io/security.txt"
-  status=301
-  [[redirects]]
-  from="/index.html/*"
-  to="/"
-  status=301
