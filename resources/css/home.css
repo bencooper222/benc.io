@@ -36,7 +36,7 @@ h3 {
   text-align: left;
 }
 
-icons svg.not-fa {
+/* icons svg.not-fa {
   -webkit-font-smoothing: antialiased;
   background-color: transparent;
   color: white;
@@ -46,11 +46,11 @@ icons svg.not-fa {
   height: 2.14929577em;
   text-rendering: auto;
   width: 2em;
-}
+} */
 
-icons svg.not-fa::before {
+/* icons svg.not-fa::before {
   content: '\f003';
-}
+} */
 
 #icons .icon-spacing {
   margin-right: 22px;
@@ -96,7 +96,7 @@ span.strike {
 @media (prefers-color-scheme: light) {
   body {
     background-color: white;
-    background-color: black;
+    color: black;
   }
 
   #icons a {
@@ -107,26 +107,26 @@ span.strike {
     color: white;
   }
 
-  icons svg.not-fa {
+  /* icons svg.not-fa {
     color: white;
-  }
+  } */
 }
 
 @media (prefers-color-scheme: dark) {
   body {
     background-color: black;
-    background-color: white;
+    color: white;
   }
 
   #icons a {
-    color: black;
+    color: white;
   }
 
   #icons a svg {
     color: black;
   }
-
+  /* 
   icons svg.not-fa {
-    color: black;
-  }
+    color: white;
+  } */
 }
