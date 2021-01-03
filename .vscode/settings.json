@@ -1,12 +1,7 @@
 {
-  "sasslint.enable": false,
-  "eslint.run": "onSave",
-  "tslint.packageManager": "yarn",
-  "tslint.enable": false,
-  "eslint.enable": true,
-  "eslint.packageManager": "yarn",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.associations": {
     "*.json": "jsonc"
-  },
-  "npm.enableScriptExplorer": true
+  }
 }
