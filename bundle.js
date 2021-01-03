@@ -11,7 +11,7 @@ const fs_writeFile = util.promisify(fs.writeFile);
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
 (async () => {
-  const oldArticles = JSON.parse(fs.readFileSync('resources/articles.json', 'utf8'));
+  const oldArticles = JSON.parse(fs.readFileSync('src/articles.json', 'utf8'));
 
   fs_writeFile(
     'resources/articles.use.json',
@@ -34,7 +34,7 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config();
     ),
     'utf8',
   ).then(() => {
-    const bundler = new Parcel(path.join(__dirname, './index.html'), {
+    const bundler = new Parcel(path.join(__dirname, './src/index.html'), {
       publicUrl: './',
       watch: false,
       minify: true,
