@@ -3,6 +3,7 @@
     "target": "es5",
     "lib": ["es2017", "dom"],
     "strict": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   }
 }
