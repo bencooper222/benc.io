@@ -1,20 +1,19 @@
-const Parcel = require('parcel-bundler');
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
+const Parcel = require('parcel-bundler');
 const path = require('path');
 const fs = require('fs');
 const util = require('util');
 const BitlyClient = require('bitly').BitlyClient;
 const bitly = new BitlyClient(process.env.BITLY_API_KEY);
 
-const fs_writeFile = util.promisify(fs.writeFile);
-
-if (process.env.NODE_ENV !== 'production') require('dotenv').config();
+const fsWriteFileAsync = util.promisify(fs.writeFile);
 
 (async () => {
   const oldArticles = JSON.parse(fs.readFileSync('src/articles.json', 'utf8'));
 
-  fs_writeFile(
-    'resources/articles.use.json',
+  await fsWriteFileAsync(
+    'src/articles.use.json',
     JSON.stringify(
       await Promise.all(
         oldArticles.map(article => {
