@@ -29,7 +29,7 @@
     "pretty": "prettier --write ."
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.10.1",
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "bitly": "^7.1.0",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-static-files-copy": "^1.2.4",
