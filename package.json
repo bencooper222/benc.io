@@ -27,12 +27,14 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.10.1",
     "parcel-bundler": "^1.12.4",
-    "parcel-plugin-static-files-copy": "^1.2.4",
+    "parcel-plugin-static-files-copy": "^2.6.0",
     "typescript": "^4.1.3"
   },
   "devDependencies": {
     "dotenv": "^5.0.1",
     "prettier": "~2.2.1"
   },
-  "staticPath": "static"
+  "staticFiles": {
+    "staticPath": "static"
+  }
 }
