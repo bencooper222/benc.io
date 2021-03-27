@@ -8,10 +8,6 @@
     "benc.io",
     "Netlify"
   ],
-  "engines": {
-    "node": ">=8",
-    "yarn": ">= 1.5.0"
-  },
   "bugs": "https://github.com/bencooper222/benc.io/issues",
   "author": {
     "name": "Benjamin Cooper",
@@ -24,13 +20,12 @@
   "repository": "https://github.com/bencooper222/benc.io.git",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "cp src/articles.json src/articles.use.json && parcel src/index.html",
-    "prod": "node bundle.js",
+    "dev": "parcel src/index.html",
+    "prod": "parcel build src/index.html",
     "pretty": "prettier --write ."
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.10.1",
-    "bitly": "^7.1.0",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-static-files-copy": "^1.2.4",
     "typescript": "^4.1.3"
