@@ -8,10 +8,6 @@
     "benc.io",
     "Netlify"
   ],
-  "engines": {
-    "node": ">=8",
-    "yarn": ">= 1.5.0"
-  },
   "bugs": "https://github.com/bencooper222/benc.io/issues",
   "author": {
     "name": "Benjamin Cooper",
