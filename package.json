@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "dotenv": "^5.0.1",
-    "prettier": "~2.2.1"
+    "prettier": "~2.3.0"
   },
   "staticFiles": {
     "staticPath": "static"
